@@ -26,6 +26,6 @@ public class Student {
     public void printProfile() {
         System.out.println("Student ID: " + studentId);
         System.out.println("Name: " + studentName);
-        System.out.println("Email: " + email);
+        System.out.println("Email: " + email + "\n");
     }
 }

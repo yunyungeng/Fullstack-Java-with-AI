@@ -1,4 +1,4 @@
-# Day 1 Exercise 01
+# Exercise 01
 
 ## Tasks
 ### 1. What is the purpose of `Course.java`?
@@ -43,3 +43,48 @@ The AI explained that a Java class is similar to a class in Python or C++. It de
 
 
 The use of `this` inside the constructor. I understood that the constructor was setting up the object's fields, but I didn't immediately get why lines like `this.courseId = courseId;` needed the this part at all, since the parameter and the field have the same name. 
+
+# Exercise 02
+
+## Tasks
+**Add two new fields to `Course.java`:**
+- private String category;
+- private boolean active;
+
+**Update the constructor so that every course has:**
+- A category, for example Programming, Frontend, Database, or Project.
+- An active status, either true or false.
+
+**Update the printSummary() method so the output includes:**
+```
+Category: Programming
+Status: Active
+or:
+Status: Inactive
+```
+
+**Challenge:**
+Do not print true or false directly. Print friendly text:
+- Active
+- Inactive
+
+### Brief explanation of what changed in `Course.java`
+**1. New Private fields**
+
+Two new private instance variables were added at the top of the class to capture more details about each course:
+
+`private String category;`: Stores the domain of the course (for example, "Programming", "Database", or "Frontend").
+
+`private boolean active;`: A flag determining whether the course is currently running (true) or inactive (false).
+
+**2. Updated Contructor method**
+
+The class constructor was updated so every `Course` object includes Category and Status:
+```
+public Course(String courseId, String title, int durationHours, String level, String category, boolean active) {  }
+```
+
+**3. Updated `printSummary()`** method
+
+The `printSummary()` method was updated to print Category and Status. Instead of printing the raw boolean value (`true` or `false`), it uses Active for true and Inactive for false.
+
