@@ -1,1 +1,1 @@
-# NFS_JAVA_C2_2026
+Fullstack Java with AI
