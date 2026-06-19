@@ -1,113 +1,45 @@
+# Day 1 Exercise 01
 
-# NFS_JAVA_C2_2026 | Full-Stack Development with Java, React & MongoDB
+## Tasks
+### 1. What is the purpose of `Course.java`?
+It acts as the blueprint to model a specific training course or class. It stores course details such as the ID, title, length, difficulty, and the instructor who teaches the course. It also has a `printSummary()` method prints the summary of the course information.
 
+### 2. What is the purpose of `Instructor.java`?
+It acts as the blueprint to model a teacher or instructor. It stores the instructor's details such as their ID, name, and their field of expertise. It also has a `printProfile()` method to print the instructor's information. It is used so a `Course` object can reference who is the instructor for that course.
 
+### 3. What is the purpose of `Student.java`?
+It acts as the blueprint to model a student in your application. It stores the information of the students such as their ID, names, and emails. It has a `printProfile()` method to print the student's information.
 
-## Programme Description
+### 4. What does the constructor do?
+A method that initializes a new object the moment it is created. For example:
+```
+Student student1 = new Student("S001", "Alice Johnson", "alice.johnson@example.com");
+```
+It takes in the values you pass and assigns them to the object's field, so the object is ready to use instead of having empty fields.
 
+### 5. Why are the fields marked as `private`?
+It is to protect the data, also called **Encapsulation**. It is to prevent outside classes from reading or modifying them directly. If an outside class needs to see the data, they must used the public getter/setter methods (e.g., `getName()`).
 
+### 6. What does `course1.assignInstructor(instructor1);` mean?
+This calls a method on the `course1` object, passing in an `instructor1` object, to link that instructor to that course. It basically means assigning `instructor1` (John Doe) to be the teacher of `course1` (Introduction to Computer Science). The `printSummary()` would then show the instructor's name instead of "Not assigned yet."
 
-This 20-day programme is designed to help participants build a complete full-stack web application using Java, Spring Boot, React, and MongoDB.
+### 7. What does `student1.printProfile();` do?
+It calls a method on the `student1` object which prints their student ID, name and email to the console. For example, for `student1` it would print:
 
+```
+Student ID: S001
+Name: Alice Johnson
+Email: alice.johnson@example.com
+```
 
+## AI-Assisted Task
+**Prompt:** Explain this Java class to someone who already knows Python or C++.
 
-The programme takes learners from programming and web fundamentals to backend API development, frontend interface design, database modelling, authentication, testing, performance improvement, and final capstone presentation.
+**1. One explanation from AI that helped you.**
 
+The AI explained that a Java class is similar to a class in Python or C++. It described how fields (variables) store an object's data, while methods (functions) define the actions the object can perform.
 
+**2. One part you still needed the trainer or your own reading to understand.**
 
-Throughout the programme, participants will work on practical exercises and gradually build a small but production-like web application. The final outcome is a working capstone project that demonstrates the use of a React frontend, Spring Boot backend, MongoDB database, secure authentication, API documentation, testing practices, and deployment-readiness basics.
 
-
-
-AI tools such as Gemini are used as learning accelerators to help scaffold examples, suggest refactoring ideas, draft tests, generate sample data, and support MongoDB query or aggregation design. However, participants are expected to review, verify, understand, and take ownership of all generated code.
-
-
-
----
-
-
-
-## Programme Duration
-
-
-
-* Duration: 20 training days
-
-* Daily Duration: 7 hours per day
-
-* Total Training Hours: 140 hours
-
-* Mode: Instructor-led training with guided labs, team build activities, review sessions, quizzes, and capstone development
-
-
-
----
-
-
-
-## Programme Objectives
-
-
-
-By the end of this programme, participants will be able to:
-
-
-
-* Understand web fundamentals, HTTP, REST, and JSON.
-
-* Write basic to intermediate Java and JavaScript code.
-
-* Build REST APIs using Spring Boot.
-
-* Apply validation, authentication, authorisation, and error-handling practices.
-
-* Model data effectively using MongoDB.
-
-* Use MongoDB indexes, queries, pagination, and aggregation pipelines.
-
-* Build accessible React user interfaces with routing, forms, state, and data fetching.
-
-* Apply testing practices for backend and frontend development.
-
-* Use AI coding assistants responsibly for learning, refactoring, testing, and documentation.
-
-* Design, build, document, and present a full-stack capstone project.
-
-
-
----
-
-
-
-
-
----
-
-
-
-## AI-Assisted Learning Guidelines
-
-
-
-Participants may use AI tools to:
-
-
-
-* Generate README drafts and documentation sections.
-
-* Create API call examples and JSON payload samples.
-
-* Suggest method signatures and edge cases.
-
-* Propose refactoring options.
-
-* Draft test scenarios for backend and frontend features.
-
-* Suggest MongoDB document structures, queries, indexes, and aggregation pipelines.
-
-* Improve demo scripts and presentation notes.
-
-
-
-Participants must always review, verify, test, and understand any AI-generated output. No passwords, API keys, tokens, private keys, or confidential data should be placed into AI prompts.
-
+The use of `this` inside the constructor. I understood that the constructor was setting up the object's fields, but I didn't immediately get why lines like `this.courseId = courseId;` needed the this part at all, since the parameter and the field have the same name. 
