@@ -1,4 +1,4 @@
-package src.main.java.com.fullstack;
+package com.fullstack;
 
 public class Student {
     private String studentId;

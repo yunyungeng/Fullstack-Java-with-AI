@@ -1,4 +1,4 @@
-package src.main.java.com.fullstack;
+package com.fullstack;
 
 public class Course {
     private String courseId;
@@ -55,7 +55,7 @@ public class Course {
         this.instructor = instructor;
     }
 
-    public void printSummary() {
+    public void printCourseSummary() {
         System.out.println("Course ID: " + courseId);
         System.out.println("Title: " + title);
         System.out.println("Duration " + durationHours + "hours");
