@@ -88,3 +88,12 @@ public Course(String courseId, String title, int durationHours, String level, St
 
 The `printSummary()` method was updated to print Category and Status. Instead of printing the raw boolean value (`true` or `false`), it uses Active for true and Inactive for false.
 
+# Exercise 03
+### Why is CourseOffering more useful than using only Course when building a real web application?
+
+In a real web application, a `Course` is just a static template (like a blueprint), while a `CourseOffering` is a live event scheduled in the real world.
+
+1. **Prevents Data Duplication:** You only write the course details (like title, description, and difficulty) *once* in the `Course` database. You don't have to duplicate that general information every time you run a new class intake.
+2. **Handles Multiple Schedules:** A single course template (e.g., "Java Fundamentals") can run multiple times simultaneously such as a Morning Intake, an Evening Intake, or a June 2026 Batch. Each individual run needs its own independent start dates, end dates, and student capacities.
+3. **Tracks Dynamic Resources:** The teacher, the room number, the delivery method (Online vs. Physical), and the roster of enrolled students belong strictly to a specific *scheduled run* (`CourseOffering`), not the general course catalog entry itself.
+
