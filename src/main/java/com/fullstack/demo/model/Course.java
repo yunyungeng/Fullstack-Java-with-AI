@@ -113,7 +113,7 @@ public class Course {
         System.out.println("Status: " + (active ? "Active" : "Inactive"));
 
         if (instructor == null) {
-            System.out.println("Instructor: Not assigned yet" + "\n");
+            System.out.println("Instructor: Not assigned yet\n");
         } else {
             System.out.println("Instructor: " + instructor.getInstructorName() + "\n");
         }
