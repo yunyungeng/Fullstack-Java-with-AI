@@ -1,4 +1,4 @@
-package com.fullstack;
+package com.fullstack.demo.model;
 
 public class CourseOffering {
     private String offeringId;
@@ -55,6 +55,17 @@ public class CourseOffering {
 
     public String getDeliveryMode() {
         return deliveryMode;
+    }
+
+    public String getSummary() {
+        return "Course Offering ID: " + offeringId + "\n" +
+               "Offering Name: " + offeringName + "\n" +
+               "Course: " + course.getTitle() + "\n" +
+               "Instructor: " + instructor.getInstructorName() + "\n" +
+               "Start Date: " + startDate + "\n" +
+               "End Date: " + endDate + "\n" +
+               "Capacity: " + capacity + "\n" +
+               "Delivery Mode: " + deliveryMode;
     }
 
     // Print the summary of the course offering
