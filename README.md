@@ -34,3 +34,10 @@ Which version is easier to understand: loop or stream? Why?
 
 What does `filter()` do in a stream?
 - It acts as a conditional check gatekeeper (like an `if` statement). It looks at each individual item traveling down the data pipeline and tests it against a boolean statement; only items that evaluate to `true` are allowed to pass through to the next stage.
+
+## Exercise 06
+How is `StudentService` similar to `CourseService`?
+- `StudentService` is similar to `CourseService` because both use a repository interface, handle business logic, and delegate data storage and retrieval to that repository.
+
+Which file stores students temporarily while the program is running?
+- `InMemoryStudentRepository.java` because it stores student data temporarily in memory while the program runs.
