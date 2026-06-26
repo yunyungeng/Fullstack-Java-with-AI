@@ -22,3 +22,8 @@ Why is throwing CourseNotFoundException better than printing inside CourseServic
     - A **Console** application can catch it and display custom text in the terminal.
     - **Web API Controller** can intercept it and automatically map it into a standardized 404 Not Found JSON payload response.
     - **Frontend application** can take that network error payload and display a styled error card or an alert toast message.
+
+## Exercise 04
+Why is CourseOffering a better design than putting start date, end date, and capacity directly inside Course?
+- By using `CourseOffering`, the `Course` class stays clean as a reusable blueprint. 
+- You can schedule multiple live intakes (`OFF001`, `OFF003`) at different times, with different capacities, or even swap instructors per cohort without modifying `Course` class.
