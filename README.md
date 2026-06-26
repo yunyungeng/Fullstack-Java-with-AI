@@ -27,3 +27,10 @@ Why is throwing CourseNotFoundException better than printing inside CourseServic
 Why is CourseOffering a better design than putting start date, end date, and capacity directly inside Course?
 - By using `CourseOffering`, the `Course` class stays clean as a reusable blueprint. 
 - You can schedule multiple live intakes (`OFF001`, `OFF003`) at different times, with different capacities, or even swap instructors per cohort without modifying `Course` class.
+
+## Exercise 05
+Which version is easier to understand: loop or stream? Why?
+- The loop version is easier to understand because it explicitly shows step-by-step instructions (creating an empty array list, manually evaluating an `if` condition, and physically appending the item). However, the stream version becomes easier once you are familiar with it because it reads like a natural English sentence and avoids boilerplate setup code.
+
+What does `filter()` do in a stream?
+- It acts as a conditional check gatekeeper (like an `if` statement). It looks at each individual item traveling down the data pipeline and tests it against a boolean statement; only items that evaluate to `true` are allowed to pass through to the next stage.

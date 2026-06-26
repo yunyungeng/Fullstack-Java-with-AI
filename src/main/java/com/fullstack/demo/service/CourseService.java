@@ -6,6 +6,7 @@ import com.fullstack.demo.exception.InvalidCourseException;
 import com.fullstack.demo.model.Course;
 import com.fullstack.demo.model.Instructor;
 import com.fullstack.demo.repository.CourseRepository;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseService {
@@ -51,8 +52,51 @@ public class CourseService {
     public List<Course> searchByTitle(String keyword) {
         String safeKeyword = (keyword == null) ? "" : keyword.trim().toLowerCase();
 
+        // String safeKeyword;
+
+        // if (keyword == null) {
+        //     safeKeyword = "";
+        // } else {
+        //     safeKeyword = keyword.trim().toLowerCase();
+        // }
+
         return courseRepository.findAll().stream()
                 .filter(course -> course.getTitle().toLowerCase().contains(safeKeyword))
+                .toList();
+    }
+
+    // Method to search courses by title using Loop
+    public List<Course> searchByTitleUsingLoop(String keyword) {
+        String safeKeyword = keyword == null ? "" : keyword.trim().toLowerCase();
+        List<Course> results = new ArrayList<>();
+
+        for (Course course : courseRepository.findAll()) {
+            if (course.getTitle().toLowerCase().contains(safeKeyword)) {
+                results.add(course);
+            }
+        }
+        return results;
+    } 
+
+    // Day 3 Exercise 05 - Search by level using Loop
+    public List<Course> searchByLevelUsingLoop(String level) {
+        String safeLevel = level == null ? "" : level.trim();
+        List<Course> results = new ArrayList<>();
+
+        for (Course course : courseRepository.findAll()) {
+            if (course.getLevel().equalsIgnoreCase(safeLevel)) {
+                results.add(course);
+            }
+        }
+        return results;
+    }
+
+    // Day 3 Exercise 05 - Search by level using Stream
+    public List<Course> searchByLevelUsingStream(String level) {
+        String safeLevel = level == null ? "" : level.trim();
+
+        return courseRepository.findAll().stream()
+                .filter(course -> course.getLevel().equalsIgnoreCase(safeLevel))
                 .toList();
     }
 
@@ -97,6 +141,18 @@ public class CourseService {
         Course course = getCourseById(courseId);
         course.setDurationHours(newDurationHours);
         return courseRepository.save(course);
+    }
+
+    // Day 3 Exercise 05 - Add search by duration
+    public List<Course> searchByMinimumDurationUsingLoop(int minimumHours) {
+        List<Course> results = new ArrayList<>();
+
+        for (Course course : courseRepository.findAll()) {
+            if (course.getDurationHours() >= minimumHours) {
+                results.add(course);
+            }
+        }
+        return results;
     }
 
     // Method to validate the course fields
