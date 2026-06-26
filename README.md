@@ -14,3 +14,11 @@ Why is `InMemoryCourseRepository` temporary storage?
 What would probably replace it later when we use MongoDB?
 - It will be replaced by MongoDB database service that is running on hard disk drive.
 - Because a hard drive is permanent (non-volatile) storage, any data you save will stay perfectly intact, even if you turn off your application or shut down your computer for weeks.
+
+## Exercise 03
+Why is throwing CourseNotFoundException better than printing inside CourseService?
+- A service's responsibility is executing and processing business rules. It shouldn't dictate how errors are displayed to an end-user.
+- Printing `System.out.println()` only works in a terminal-based Console Application. By throwing a native exception instead, the service becomes adaptable to any user interface. For example:
+    - A **Console** application can catch it and display custom text in the terminal.
+    - **Web API Controller** can intercept it and automatically map it into a standardized 404 Not Found JSON payload response.
+    - **Frontend application** can take that network error payload and display a styled error card or an alert toast message.
