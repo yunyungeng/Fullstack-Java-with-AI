@@ -43,12 +43,5 @@ public class Day3_Assignment01_CodeFlowPractice {
 
         // Print the course summary
         retrievedCourse.printSummary();
-
-        /* README reflection
-        When getCourseById("C004") is called, which file does the request go to first, second, and third?
-        1. The request goes to the CourseService class first, which handles the business logic and validation.
-        2. The request then goes to the InMemoryCourseRepository class, which is responsible for managing the data storage and retrieval of course information.
-        3. Finally, the request goes to the Course class, which represents the course entity and contains the course data.
-        */
     }
 }

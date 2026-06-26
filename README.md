@@ -1,99 +1,16 @@
-# Exercise 01
+# Reflection
 
-## Tasks
-### 1. What is the purpose of `Course.java`?
-It acts as the blueprint to model a specific training course or class. It stores course details such as the ID, title, length, difficulty, and the instructor who teaches the course. It also has a `printSummary()` method prints the summary of the course information.
+## Exercise 01
+When `getCourseById("C004")` is called, which file does the request go to first, second, and third?
+1. The request goes to the `CourseService` class first, which handles the business logic and v`alidation.
+2. The request then goes to the `InMemoryCourseRepository` class, which is responsible for managing the data storage and retrieval of course information.
+3. Finally, the request goes to the `Course` class, which represents the course entity and contains the course data.
 
-### 2. What is the purpose of `Instructor.java`?
-It acts as the blueprint to model a teacher or instructor. It stores the instructor's details such as their ID, name, and their field of expertise. It also has a `printProfile()` method to print the instructor's information. It is used so a `Course` object can reference who is the instructor for that course.
+## Exercise 02
+Why is `InMemoryCourseRepository` temporary storage?
+- `InMemoryCourseRepository` is temporary storage because it stores data in memory using a Java Collection (`LinkedHashMap`).
+- Memory is volatile and will be lost when the application stops running.
 
-### 3. What is the purpose of `Student.java`?
-It acts as the blueprint to model a student in your application. It stores the information of the students such as their ID, names, and emails. It has a `printProfile()` method to print the student's information.
-
-### 4. What does the constructor do?
-A method that initializes a new object the moment it is created. For example:
-```
-Student student1 = new Student("S001", "Alice Johnson", "alice.johnson@example.com");
-```
-It takes in the values you pass and assigns them to the object's field, so the object is ready to use instead of having empty fields.
-
-### 5. Why are the fields marked as `private`?
-It is to protect the data, also called **Encapsulation**. It is to prevent outside classes from reading or modifying them directly. If an outside class needs to see the data, they must used the public getter/setter methods (e.g., `getName()`).
-
-### 6. What does `course1.assignInstructor(instructor1);` mean?
-This calls a method on the `course1` object, passing in an `instructor1` object, to link that instructor to that course. It basically means assigning `instructor1` (John Doe) to be the teacher of `course1` (Introduction to Computer Science). The `printSummary()` would then show the instructor's name instead of "Not assigned yet."
-
-### 7. What does `student1.printProfile();` do?
-It calls a method on the `student1` object which prints their student ID, name and email to the console. For example, for `student1` it would print:
-
-```
-Student ID: S001
-Name: Alice Johnson
-Email: alice.johnson@example.com
-```
-
-## AI-Assisted Task
-**Prompt:** Explain this Java class to someone who already knows Python or C++.
-
-**1. One explanation from AI that helped you.**
-
-The AI explained that a Java class is similar to a class in Python or C++. It described how fields (variables) store an object's data, while methods (functions) define the actions the object can perform.
-
-**2. One part you still needed the trainer or your own reading to understand.**
-
-
-The use of `this` inside the constructor. I understood that the constructor was setting up the object's fields, but I didn't immediately get why lines like `this.courseId = courseId;` needed the this part at all, since the parameter and the field have the same name. 
-
-# Exercise 02
-
-## Tasks
-**Add two new fields to `Course.java`:**
-- private String category;
-- private boolean active;
-
-**Update the constructor so that every course has:**
-- A category, for example Programming, Frontend, Database, or Project.
-- An active status, either true or false.
-
-**Update the printSummary() method so the output includes:**
-```
-Category: Programming
-Status: Active
-or:
-Status: Inactive
-```
-
-**Challenge:**
-Do not print true or false directly. Print friendly text:
-- Active
-- Inactive
-
-### Brief explanation of what changed in `Course.java`
-**1. New Private fields**
-
-Two new private instance variables were added at the top of the class to capture more details about each course:
-
-`private String category;`: Stores the domain of the course (for example, "Programming", "Database", or "Frontend").
-
-`private boolean active;`: A flag determining whether the course is currently running (true) or inactive (false).
-
-**2. Updated Contructor method**
-
-The class constructor was updated so every `Course` object includes Category and Status:
-```
-public Course(String courseId, String title, int durationHours, String level, String category, boolean active) {  }
-```
-
-**3. Updated `printSummary()`** method
-
-The `printSummary()` method was updated to print Category and Status. Instead of printing the raw boolean value (`true` or `false`), it uses Active for true and Inactive for false.
-
-# Exercise 03
-### Why is CourseOffering more useful than using only Course when building a real web application?
-
-In a real web application, a `Course` is just a static template (like a blueprint), while a `CourseOffering` is a live event scheduled in the real world.
-
-1. **Prevents Data Duplication:** You only write the course details (like title, description, and difficulty) *once* in the `Course` database. You don't have to duplicate that general information every time you run a new class intake.
-2. **Handles Multiple Schedules:** A single course template (e.g., "Java Fundamentals") can run multiple times simultaneously such as a Morning Intake, an Evening Intake, or a June 2026 Batch. Each individual run needs its own independent start dates, end dates, and student capacities.
-3. **Tracks Dynamic Resources:** The teacher, the room number, the delivery method (Online vs. Physical), and the roster of enrolled students belong strictly to a specific *scheduled run* (`CourseOffering`), not the general course catalog entry itself.
-
+What would probably replace it later when we use MongoDB?
+- It will be replaced by MongoDB database service that is running on hard disk drive.
+- Because a hard drive is permanent (non-volatile) storage, any data you save will stay perfectly intact, even if you turn off your application or shut down your computer for weeks.
