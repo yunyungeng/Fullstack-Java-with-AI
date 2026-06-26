@@ -1,4 +1,4 @@
-# Reflection
+# Day 3: Reflection
 
 ## Exercise 01
 When `getCourseById("C004")` is called, which file does the request go to first, second, and third?
