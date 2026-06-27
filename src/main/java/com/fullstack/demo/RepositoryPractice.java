@@ -19,28 +19,19 @@ public class RepositoryPractice {
             "C005",
             "API Documentation",
             7,
-            "Beginner",
-            "Programming",
-            true
-        );
+            "Beginner");
 
         Course course2 = new Course(
             "C006",
             "Java Collections Practice",
             12,
-            "Beginner",
-            "Programming",
-            true
-        );
+            "Beginner");
 
         Course course3 = new Course(
             "C007",
             "Clean Code Basics",
             8,
-            "Intermediate",
-            "Programming",
-            true
-        );
+            "Intermediate");
 
         // Save the courses to the repository
         courseRepository.save(course1);

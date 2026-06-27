@@ -27,10 +27,7 @@ public class Day3_Assignment01_CodeFlowPractice {
             "C004",
             "Spring Boot API Development",
             18,
-            "Intermediate",
-            "Programming",
-            true
-        );
+            "Intermediate");
 
         // Task C - Retrieve the course by ID
 

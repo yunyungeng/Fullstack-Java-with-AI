@@ -11,8 +11,8 @@ public class Day3_Assignment04_ObjectRelationshipPractice {
         Instructor instructor2 = new Instructor("I002", "Marcus Lee", "React and Frontend Development");
 
         // Task B - Create two courses
-        Course course1 = new Course("C001", "Java Fundamentals", 14, "Beginner", "Programming", false);
-        Course course2 = new Course("C002", "React Frontend Development", 21, "Intermediate", "Frontend", true);
+        Course course1 = new Course("C001", "Java Fundamentals", 14, "Beginner");
+        Course course2 = new Course("C002", "React Frontend Development", 21, "Intermediate");
 
         // Task C - Assign instructors to courses
         course1.setInstructor(instructor1);

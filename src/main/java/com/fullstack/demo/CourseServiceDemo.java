@@ -20,9 +20,9 @@ public class CourseServiceDemo {
         try {
             System.out.println("=== 1. Create Courses ===");
 
-            Course javaCourse = new Course("C001", "Java Fundamentals", 14, "Beginner", "Programming", false);
-            Course reactCourse = new Course("C002", "React Frontend Development", 21, "Intermediate", "Frontend", true);
-            Course mongoCourse = new Course("C003", "MongoDB Basics", 10, "Beginner", "Database", false);
+            Course javaCourse = new Course("C001", "Java Fundamentals", 14, "Beginner");
+            Course reactCourse = new Course("C002", "React Frontend Development", 21, "Intermediate");
+            Course mongoCourse = new Course("C003", "MongoDB Basics", 10, "Beginner");
 
             courseService.createCourse(javaCourse);
             courseService.createCourse(reactCourse);

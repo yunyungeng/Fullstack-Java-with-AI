@@ -12,7 +12,7 @@ public class Course {
     private boolean active;
 
     // Task 3: Contructor method
-    public Course(String courseId, String title, int durationHours, String level, String category, boolean active) {
+    public Course(String courseId, String title, int durationHours, String level) {
         setCourseId(courseId);
         setTitle(title);
         setDurationHours(durationHours);

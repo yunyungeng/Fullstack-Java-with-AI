@@ -19,10 +19,10 @@ public class Main {
         Instructor instructor4 = new Instructor("I004", "Michael Brown", "Artificial Intelligence");
 
         // Create Course objects
-        Course course1 = new Course("C001", "Introduction to Computer Science", 40, "Beginner", "Programming", true);
-        Course course2 = new Course("C002", "Data Structures and Algorithms", 60, "Intermediate", "Programming", false);
-        Course course3 = new Course("C003", "Java Fundamentals", 50, "Advanced", "Data Science", false);
-        Course course4 = new Course("C004", "Data Science", 45, "Intermediate", "Programming", true);
+        Course course1 = new Course("C001", "Introduction to Computer Science", 40, "Beginner");
+        Course course2 = new Course("C002", "Data Structures and Algorithms", 60, "Intermediate");
+        Course course3 = new Course("C003", "Java Fundamentals", 50, "Advanced");
+        Course course4 = new Course("C004", "Data Science", 45, "Intermediate");
 
         // Create Student objects
         Student student1 = new Student("S001", "Alice Johnson", "alice.johnson@example.com");
@@ -45,10 +45,10 @@ public class Main {
         ArrayList<Student> students = new ArrayList<>();
         ArrayList<CourseOffering> offerings = new ArrayList<>();
         
-        courses.add(new Course("C001", "Introduction to Computer Science", 40, "Beginner", "Programming", true));
-        courses.add(new Course("C002", "Data Structures and Algorithms", 60, "Intermediate", "Data Structures", false));
-        courses.add(new Course("C003", "Java Fundamentals", 50, "Advanced", "Java Fundamentals", false));
-        courses.add(new Course("C004", "Data Science", 45, "Intermediate", "Data Science", true));
+        courses.add(new Course("C001", "Introduction to Computer Science", 40, "Beginner"));
+        courses.add(new Course("C002", "Data Structures and Algorithms", 60, "Intermediate"));
+        courses.add(new Course("C003", "Java Fundamentals", 50, "Advanced"));
+        courses.add(new Course("C004", "Data Science", 45, "Intermediate"));
 
         instructors.add(new Instructor("I001", "John Doe", "Computer Science"));
         instructors.add(new Instructor("I002", "Jane Smith", "Data Science"));

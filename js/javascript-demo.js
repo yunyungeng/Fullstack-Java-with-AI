@@ -1,5 +1,8 @@
 // JS does not require classes for simple data.
 // We can represent a course as an object literal with properties.
+// Course course = new Course("C001", "JavaScript Fundamentals", 12, "Beginner", "John Doe");
+// to run, type: node javascript-demo.js
+
 
 /*
 Java:
@@ -13,9 +16,10 @@ JavaScript:
     1. Dynamic typing
     2. Prototype-based structure
     3. No private fields (ES6 introduced private fields with #)
-    4. Runtime errors
+    4. Properties can be accessed and modified at runtime
     5. Less boilerplate code
     6. Object literals and functions can be used to create objects without classes
+    7. Runtime errors
 */
 
 // To run, type `node javascript-demo.js` in the terminal.

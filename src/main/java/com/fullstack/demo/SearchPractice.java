@@ -11,10 +11,10 @@ public class SearchPractice {
         CourseRepository repository = new InMemoryCourseRepository();
         CourseService courseService = new CourseService(repository);
 
-        courseService.createCourse(new Course("C001", "Java Fundamentals", 14, "Beginner", "IT", true));
-        courseService.createCourse(new Course("C002", "React Frontend Development", 21, "Intermediate", "IT", true));
-        courseService.createCourse(new Course("C003", "MongoDB Basics", 10, "Beginner", "IT", true));
-        courseService.createCourse(new Course("C004", "Spring Boot API Development", 18, "Intermediate", "IT", true));
+        courseService.createCourse(new Course("C001", "Java Fundamentals", 14, "Beginner"));
+        courseService.createCourse(new Course("C002", "React Frontend Development", 21, "Intermediate"));
+        courseService.createCourse(new Course("C003", "MongoDB Basics", 10, "Beginner"));
+        courseService.createCourse(new Course("C004", "Spring Boot API Development", 18, "Intermediate"));
 
         // Test Task C - Search via loop
         System.out.println("\n=== Beginner Courses (Using Loop) ===");

@@ -17,19 +17,13 @@ public class ExceptionPractice {
             "C001",
             "Java Fundamentals",
             15,
-            "Beginner",
-            "Programming",
-            true
-        );
+            "Beginner");
 
         Course course2 = new Course(
             "C002",
             "React Frontend Development",
             20,
-            "Intermediate",
-            "Frontend",
-            true
-        );
+            "Intermediate");
 
         courseService.createCourse(course1);
         courseService.createCourse(course2);
