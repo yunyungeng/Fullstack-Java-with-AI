@@ -69,7 +69,7 @@ public class CourseOffering {
     }
 
     // Print the summary of the course offering
-    public void printOfferingSummary() {
+    public void printSummary() {
         System.out.println("Course Offering ID: " + offeringId);
         System.out.println("Offering Name: " + offeringName);
 

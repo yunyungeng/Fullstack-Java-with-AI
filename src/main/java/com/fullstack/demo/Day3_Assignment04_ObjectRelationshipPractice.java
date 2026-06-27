@@ -54,8 +54,8 @@ public class Day3_Assignment04_ObjectRelationshipPractice {
 
         // Print the summary for both course offerings
         System.out.println("=== Course Offerings ===");
-        offering1.printOfferingSummary();
-        offering2.printOfferingSummary();
+        offering1.printSummary();
+        offering2.printSummary();
 
         // Extension task
         // Create a third course offering that reuses the same course but uses a different date
@@ -71,7 +71,7 @@ public class Day3_Assignment04_ObjectRelationshipPractice {
         );
 
         System.err.println("=== Extension Task: Reusing Course Profile ===");
-        offering3.printOfferingSummary();
+        offering3.printSummary();
     }
 
 }

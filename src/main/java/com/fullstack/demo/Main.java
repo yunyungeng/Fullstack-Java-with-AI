@@ -85,7 +85,7 @@ public class Main {
 
         System.out.println("COURSE OFFERING SUMMARIES:");
         for (CourseOffering offering : offerings) {
-            offering.printOfferingSummary();
+            offering.printSummary();
         }
 
         // Print profiles and summaries

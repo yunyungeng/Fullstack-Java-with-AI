@@ -29,3 +29,7 @@
 **5. What is the difference between shift and unshift?**
 - `shift`: Removes an item from the beginning (index `0`) of the array.
 - `unshift`: Adds a new item to the beginning (index `0`) of the array.
+
+## Exercise 05
+**What does the DOM allow JavaScript to do?**
+- The DOM (Document Object Model) acts as a live programmatic bridge connecting your code to the browser layout. It allows JavaScript to dynamically look up elements, create new components on the fly, alter styles, update text blocks, or delete structures dynamically inside the HTML viewport page without ever requiring a heavy hard-refresh reload of the entire website.
