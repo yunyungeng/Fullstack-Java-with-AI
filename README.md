@@ -36,4 +36,4 @@
 
 ## Exercise 06
 **How is JavaScript filter used in a search feature?**
-- In a search feature, filter scans your data list. It loops over the entire array, takes the search text you typed, and uses a condition like .includes() to check if that text matches each name. Every student object that matches is copied into a brand-new filtered array, which is then handed over to your display code to immediately update what the user sees on the screen.
+- In a search feature, `filter` scans your data list. It loops over the entire array, takes the search text you typed, and uses a condition like `.includes()` to check if that text matches each name. Every student object that matches is copied into a brand-new filtered array, which is then handed over to your display code to immediately update what the user sees on the screen.
