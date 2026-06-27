@@ -1,0 +1,26 @@
+[
+  {
+    "studentId": "S001",
+    "studentName": "Roberto Chan",
+    "email": "roberto@example.com",
+    "status": "Active"
+  },
+  {
+    "studentId": "S002",
+    "studentName": "Priya Nair",
+    "email": "priya@example.com",
+    "status": "Active"
+  },
+  {
+    "studentId": "S003",
+    "studentName": "Lee Salazae",
+    "email": "lee@example.com",
+    "status": "Inactive"
+  },
+  {
+    "studentId": "S004",
+    "studentName": "Ben Tan",
+    "email": "ben@example.com",
+    "status": "Active"
+  }
+]

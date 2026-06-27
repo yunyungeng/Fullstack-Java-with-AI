@@ -37,3 +37,19 @@
 ## Exercise 06
 **How is JavaScript filter used in a search feature?**
 - In a search feature, `filter` scans your data list. It loops over the entire array, takes the search text you typed, and uses a condition like `.includes()` to check if that text matches each name. Every student object that matches is copied into a brand-new filtered array, which is then handed over to your display code to immediately update what the user sees on the screen.
+
+## Exercise 07
+**1. What does async mean?**
+- It explicitly flags a function as asynchronous, letting the JavaScript runtime engine know that the function is going to handle multi-step actions that won't complete instantly (like loading external data assets). It allows the application to keep running other processes background tasks instead of locking up or freezing the screen while waiting.
+
+**2. What does await do?**
+- It pauses the line-by-step execution inside an `async` function until an ongoing asynchronous operation completes. It forces JavaScript to wait for a specific download or data conversion to finish successfully before trying to read variables on the lines below it.
+
+**3. What does fetch do?**
+- It initiates an asynchronous HTTP network payload web request to grab data from an external target resource, such as a file path link on the current disk storage or a remote server endpoint URL database.
+
+**4. Why do we use fetch before connecting to a real backend API?**
+- Using a static JSON file simulates an actual server connection without dealing with live server bugs, complex framework dependencies, network lag, or security firewalls. This allows you to verify that your front-end looping layout rules are fully correct first.
+
+**5. Why should this exercise be run using Live Server?**
+- Modern web browsers use a security checkpoint mechanism called CORS (Cross-Origin Resource Sharing) that blocks web applications from reading files directly out of raw local machine folders (`file://`). Running your code inside Live Server hosts the code inside a standard virtual development domain (`http://localhost`), bypassing the local security sandbox.
