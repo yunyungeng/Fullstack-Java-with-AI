@@ -69,7 +69,7 @@ After completing your table, answer the following questions:
 | :---: | --- | :---: | --- |
 | **Event Fully Booked** | `POST /api/bookings` | `400 Bad Request` | The request cannot be completed because the business rules prohibit ticket generation if the event's capacity has already reached its maximum limit.
 | **Booking Does Not Exist** | `GET /api/bookings/{bookingId}` | `404 Not Found` | The database could not match the path parameter `{bookingId}` with an active booking record, meaning the resource is completely missing.
-| **Double Cancellation Attempt** | `DELETE /api/bookings/{id}` | `400 Bad Request` | The frontend is attempting to cancel a record that has already been flagged as cancelled. The server rejects this redundant modification.
+| **Double Cancellation Attempt** | `DELETE /api/bookings/{bookingId}` | `400 Bad Request` | The frontend is attempting to cancel a record that has already been flagged as cancelled. The server rejects this redundant modification.
 
 ## 4. Explanation
 **Why your endpoint names follow REST principles**
