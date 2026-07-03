@@ -15,12 +15,12 @@ Your investigation must include:
 For each request, record the following information:
 
 | Method | URL | Status Code | Response Type | What Happened? |
-| :---: | --- | :---: | :---:| :---: |
-| GET | http://localhost:8081/api/course-offerings | 200 OK | List | **Success:** The server retrieved the internal array containing all active course offerings (CO001 and CO002) and sent them back as a JSON array.
-| GET | http://localhost:8081/api/course-offerings/CO001 | 200 OK | Single Object | **Success:** The server found an exact match for the ID CO001 inside the array and returned the individual course offering details object
-| GET | http://localhost:8081/api/course-offerings/C999 | 404 Not Found | Error Object | **Failure:** The server scanned the collection for an entry matching ID C999. Because it does not exist, it returned an error object stating the resource was not found.
-| POST | http://localhost:8081/api/course-offerings | 201 Created | Single Object | **Success:** The server validated the input payload, dynamically generated a new ID (CO003), appended it to the database array, and returned the newly created object.
-| POST | http://localhost:8081/api/course-offerings | 400 Bad Request | Error Object | **Failure:** The request payload contained empty fields and an invalid capacity of 0. The server's validation logic caught these issues and rejected the request, returning an array of field errors.
+| :---: | --- | :---: | :---:| --- |
+| `GET` | http://localhost:8081/api/course-offerings | `200 OK` | List | **Success:** The server retrieved the internal array containing all active course offerings (CO001 and CO002) and sent them back as a JSON array.
+| `GET` | http://localhost:8081/api/course-offerings/CO001 | `200 OK` | Single Object | **Success:** The server found an exact match for the ID CO001 inside the array and returned the individual course offering details object
+| `GET` | http://localhost:8081/api/course-offerings/C999 | `404 Not Found` | Error Object | **Failure:** The server scanned the collection for an entry matching ID C999. Because it does not exist, it returned an error object stating the resource was not found.
+| `POST` | http://localhost:8081/api/course-offerings | `201 Created` | Single Object | **Success:** The server validated the input payload, dynamically generated a new ID (CO003), appended it to the database array, and returned the newly created object.
+| `POST` | http://localhost:8081/api/course-offerings | `400 Bad Request` | Error Object | **Failure:** The request payload contained empty fields and an invalid capacity of 0. The server's validation logic caught these issues and rejected the request, returning an array of field errors.
 
 ## Questions to Answer
 After completing your table, answer the following questions:
@@ -45,3 +45,39 @@ After completing your table, answer the following questions:
 ## Short Reflection
 **What is one thing you understand better about REST after this exercise?**
 - Doing this investigation helped me see that a REST API is essentially a structured web doorway built directly on top of our backend logic files. The HTTP verbs (`GET`, `POST`) act as explicit instructions telling the server what operation to run, and the status codes provide a clear communication bridge so that our user interface knows exactly what happened behind the scenes without guessing.
+
+# Exercise 2: REST API Design
+
+## 1. API Specification Table
+
+| Resource | Method | Endpoint | Purpose | Request Body Needed? | Success Status | Possible Error Status
+| :---: | :---: | --- | --- | :---: | :---: | :---: |
+| **events** | `GET` | `/api/events` | View availabale events | No | `200 OK` | `500 Internal Error` |
+| **events** | `GET` | `/api/events/{eventId}` | View details of one event | No | `200 OK` | `404 Not Found` |
+| **bookings** | `POST` | `/api/bookings` | Create a booking | Yes | `201 Created` | `400 Bad Request`, `404 Not Found` |
+| **bookings** | `GET` | `/api/bookings` | View all bookings | No | `200 OK` | `401 Unauthorized`|
+| **bookings** | `GET` | `/api/bookings/{bookingId}` | View details of one booking | No | `200 OK` | `404 Not Found` |
+| **bookings** | `DELETE` | `/api/bookings/{bookingId}` | Cancel a booking | No | `204 No Content` | `404 Not Found`, `400 Bad Request` |
+
+## 2. Request and Response Planning
+| Endpoint | Request Body Description |
+| --- | --- |
+`POST /api/bookings` | A JSON object containing reference keys linking the user to the event: `eventId` (String/Long) and `ticketsRequested` (Integer). Authentication handles the user identity implicitly.
+
+## 3. Error Planning
+| Error Case | Related Endpoint | Suitable Status Code | Explanation |
+| :---: | --- | :---: | --- |
+| **Event Fully Booked** | `POST /api/bookings` | `400 Bad Request` | The request cannot be completed because the business rules prohibit ticket generation if the event's capacity has already reached its maximum limit.
+| **Booking Does Not Exist** | `GET /api/bookings/{bookingId}` | `404 Not Found` | The database could not match the path parameter `{bookingId}` with an active booking record, meaning the resource is completely missing.
+| **Double Cancellation Attempt** | `DELETE /api/bookings/{id}` | `400 Bad Request` | The frontend is attempting to cancel a record that has already been flagged as cancelled. The server rejects this redundant modification.
+
+## 4. Explanation
+**Why your endpoint names follow REST principles**
+
+My designed endpoints follow core REST principles by using nouns instead of verbs for resource paths and relying on standard HTTP methods to dictate actions. Instead of using action-style URLs like `/getAllBookings` or `/cancelBooking`, the API exposes clean collections (`/api/events` and `/api/bookings`).
+
+The intent of the request is handled purely by the HTTP verb used:
+
+- `GET` reads the data
+- `POST` creates the data
+- `DELETE` removes or cancels the data
