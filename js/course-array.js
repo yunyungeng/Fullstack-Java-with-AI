@@ -10,7 +10,7 @@ const courses = [
     {
         id: "C001",
         title: "Java Fundamentals",
-        durationHours: 10,
+        durationHours: 12,
         level: "Beginner"
     },
     {
@@ -24,12 +24,6 @@ const courses = [
         title: "MongoDB Basics",
         durationHours: 8,
         level: "Advanced"
-    },
-    {
-        id: "C004",
-        title: "Spring Boot API Development",
-        durationHours: 12,
-        level: "Intermediate"
     }
 ];
 
