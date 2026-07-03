@@ -68,6 +68,9 @@ let instructors = [
     }
 ];
 
+// --- Part A: Create a Bookings Array ---
+let bookings = [];
+
 function corsHeaders() {
     return {
         "Access-Control-Allow-Origin": "*",
@@ -144,6 +147,26 @@ function validateInstructor(payload) {
     return errors;
 }
 
+// --- Part B: Create Validation Logic ---
+function validateBooking(payload) {
+    const errors = [];
+
+    if (!payload.eventId || payload.eventId.trim() === "") {
+        errors.push({ field: "eventId", message: "Event ID is required" });
+    }
+    if (!payload.participantName || payload.participantName.trim() === "") {
+        errors.push({ field: "participantName", message: "Participant name is required" });
+    }
+    if (!payload.participantEmail || payload.participantEmail.trim() === "") {
+        errors.push({ field: "participantEmail", message: "Participant email is required" });
+    }
+    if (!Number.isInteger(payload.seats) || payload.seats < 1) {
+        errors.push({ field: "seats", message: "Seats must be a whole number greater than 0" });
+    }
+    return errors;
+}
+
+
 const server = http.createServer(async (request, response) => {
     const url = new URL(request.url, `http://${request.headers.host}`);
     const method = request.method;
@@ -172,6 +195,100 @@ const server = http.createServer(async (request, response) => {
 
         sendJson(response, 200, found);
         return;
+    }
+
+    // --- BOOKINGS ROUTING ENDPOINTS ---
+    // --- Part C: Add GET All Bookings  ---
+    if (method === "GET" && url.pathname === "/api/bookings") {
+        sendJson(response, 200, bookings);
+        return;
+    }
+
+    const bookingMatch = url.pathname.match(/^\/api\/bookings\/([^/]+)$/);
+
+    // --- Part D: Add GET One Booking  ---
+    if (method === "GET" && bookingMatch) {
+        const id = bookingMatch[1];
+        const found = bookings.find(item => item.id === id); 
+        if (!found) {
+            sendJson(response, 404, { message: `Booking ${id} was not found` });
+            return;
+        }
+        sendJson(response, 200, found);
+        return;
+    }
+
+    // Challenge Task: DELETE /api/bookings/{id} (Cancel Booking)
+    if (method === "DELETE" && bookingMatch) {
+        const id = bookingMatch[1];
+        const foundBooking = bookings.find(item => item.id === id);
+
+        if (!foundBooking) {
+            sendJson(response, 404, { message: `Booking ${id} was not found` });
+            return;
+        }
+        if (foundBooking.status === "CANCELLED") {
+            sendJson(response, 400, { message: `Booking ${id} is already cancelled` });
+            return;
+        }
+
+        // Return seats back to the event
+        const relatedEvent = events.find(event => event.id === foundBooking.eventId);
+
+        if (relatedEvent) {
+            relatedEvent.availableSeats += foundBooking.seats;
+        }
+
+        foundBooking.status = "CANCELLED";
+        sendJson(response, 200, { message: `Booking ${id} has been cancelled` });
+        return;
+    }
+
+    // --- Part E, F, G, H: POST Create Booking ---
+    if (method === "POST" && url.pathname === "/api/bookings") {
+        try {
+            const payload = await readJsonBody(request);
+            const errors = validateBooking(payload);
+
+            // Payload validation checking
+            if (errors.length > 0) {
+                sendJson(response, 400, { message: "Validation failed", errors });
+                return;
+            }
+
+            // --- Part F: Check Whether the Event Exists ---
+            const targetEvent = events.find(event => event.id === payload.eventId.trim());
+
+            if (!targetEvent) {
+                sendJson(response, 400, { message: `Event ${payload.eventId} was not found` });
+                return;
+            }
+
+            // --- Part G: Check Available Seats ---
+            if (payload.seats > targetEvent.availableSeats) {
+                sendJson(response, 400, { message: `Not enough available seats for event ${payload.eventId}` });
+                return;
+            }
+
+            // --- Part H: Reduce Available Seats After Booking ---
+            targetEvent.availableSeats -= payload.seats;
+
+            const newBooking = {
+                id: createId("B", bookings.length),
+                eventId: payload.eventId.trim(),
+                participantName: payload.participantName.trim(),
+                participantEmail: payload.participantEmail.trim(),
+                seats: payload.seats,
+                status: "CONFIRMED"
+            };
+
+            bookings.push(newBooking);
+            sendJson(response, 201, newBooking);
+            return;
+        } catch (err) {
+            sendJson(response, 400, { message: "Request body must be valid JSON" });
+            return;
+        }
     }
 
     try {

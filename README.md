@@ -81,3 +81,11 @@ The intent of the request is handled purely by the HTTP verb used:
 - `GET` reads the data
 - `POST` creates the data
 - `DELETE` removes or cancels the data
+
+## Exercise 5: Add Booking Endpoints to the Mock API
+All core endpoints and components have been successfully completed:
+
+- `GET /api/bookings`: Successfully extracts all saved booking transactions out of local state array storage.
+- `GET /api/bookings/{id}`: Safely screens individual records by resource identifiers with a structured `404 Not Found` path handler setup for missing items.
+- `POST /api/bookings`: Parses data models, checks parameters, validates event references, screens seat availability, and subtracts seats upon completing successful transactions.
+- `DELETE /api/bookings/{id}` **(Optional Task)**: Implemented to flip status flags to `"CANCELLED"` and safely refund the original seat amount back to the event record.
