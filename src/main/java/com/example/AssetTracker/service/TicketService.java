@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.assettracker.dto.TicketResponse;
+import com.example.assettracker.exception.ResourceNotFoundException;
 
 @Service
 public class TicketService {
@@ -48,5 +49,13 @@ public class TicketService {
 
     public List<TicketResponse> getAllTickets() {
         return tickets;
+    }
+
+    // Find a single ticket by ID or throw an error
+    public TicketResponse getTicketById(String id) {
+        return tickets.stream()
+                .filter(ticket -> ticket.getId().equalsIgnoreCase(id))
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException("Ticket " + id + " was not found"));
     }
 }

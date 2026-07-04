@@ -1,2 +1,8 @@
 ### Get all tickets
 GET http://localhost:8080/api/tickets
+
+### Get existing ticket
+GET http://localhost:8080/api/tickets/T001
+
+### Get missing ticket (Triggers 404)
+GET http://localhost:8080/api/tickets/T999
