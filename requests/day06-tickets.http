@@ -1,13 +1,24 @@
-### Get all tickets
+### Check Service Health
+GET http://localhost:8080/api/health
+Accept: application/json
+
+### Get Service Info
+GET http://localhost:8080/api/about
+Accept: application/json
+
+### Get All Support Tickets
 GET http://localhost:8080/api/tickets
+Accept: application/json
 
-### Get existing ticket
+### Get One Existing Ticket
 GET http://localhost:8080/api/tickets/T001
+Accept: application/json
 
-### Get missing ticket (Triggers 404)
+### Get One Missing Ticket (Triggers 404)
 GET http://localhost:8080/api/tickets/T999
+Accept: application/json
 
-### Create a Valid Ticket
+### Create a Valid Ticket (Triggers 201)
 POST http://localhost:8080/api/tickets
 Content-Type: application/json
 
