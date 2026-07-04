@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+/* 
 @RestController
 public class SupportDeskController {
     @GetMapping("/api/health")
@@ -23,4 +23,4 @@ public class SupportDeskController {
             "description", "API for managing IT support tickets"
         );
     }
-}
+}*/
