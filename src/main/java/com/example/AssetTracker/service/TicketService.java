@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.assettracker.dto.CreateTicketRequest;
 import com.example.assettracker.dto.TicketResponse;
 import com.example.assettracker.exception.ResourceNotFoundException;
 
 @Service
 public class TicketService {
     private final List<TicketResponse> tickets = new ArrayList<>();
+    private int ticketIdCounter = 4; // 
 
     public TicketService() {
         tickets.add(new TicketResponse(
@@ -57,5 +59,24 @@ public class TicketService {
                 .filter(ticket -> ticket.getId().equalsIgnoreCase(id))
                 .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket " + id + " was not found"));
+    }
+
+    public TicketResponse createTicket(CreateTicketRequest request) {
+        // Generate a new ticket ID
+        String generatedId = String.format("T%03d", ticketIdCounter++);
+
+        TicketResponse newTicket = new TicketResponse(
+            generatedId,
+            request.getTitle(),
+            request.getDescription(),
+            request.getCategory(),
+            request.getPriority(),
+            "OPEN",
+            request.getCreatedBy(),
+            "2026-07-04" // Set a default date or use the current date
+        );
+        
+        tickets.add(newTicket);
+        return newTicket;
     }
 }
