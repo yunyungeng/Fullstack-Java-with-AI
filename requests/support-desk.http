@@ -1,0 +1,5 @@
+### Health check
+GET http://localhost:8080/api/health
+
+### Test the About Endpoint
+GET http://localhost:8080/api/about

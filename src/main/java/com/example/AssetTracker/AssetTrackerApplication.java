@@ -1,4 +1,15 @@
-package com.example.AssetTracker;
+/*
+* The main application class for the Asset Tracker.
+* Normal run:
+* mvn spring-boot:run
+*
+* Run this local profile:
+* mvn spring-boot:run -Dspring-boot.run.profiles=local
+*
+* For Windows PowerShell, use:
+* mvn spring-boot:run "-Dspring-boot.run.profiles=local"
+*/
+package com.example.assettracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
