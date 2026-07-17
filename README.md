@@ -1,59 +1,20 @@
-# Day 6
+# Day 7: Reflections
 
-## Exercise 5: Create an HTTP Test File
+## Exercise 1: Install and Secure MongoDB
 
-**A short note listing which endpoints worked**
-- `GET /api/health` - Returns `200 OK`
-- `GET /api/About` - Returns `200 OK`
-- `GET /api/tickets` - Returns `200 OK`
-- `GET /api/tickets/T001` - Returns `200 OK`
-- `GET /api/tickets/T999` - Returns `404 Not Found`
-- `POST /api/tickets` **(Valid Body)** - Returns `201 Created`
-- `POST /api/tickets` **(Blank Fields)** - Returns `400 Bad Request`
+**1. What is the purpose of the `admin` database?**
 
-**One example of a successful response**
+It's the administrative database that stores system-level user credentials and roles. Users created here can be granted cluster-wide privileges (like root), and it's where authentication for privileged operations is managed.
 
-`POST http://localhost:8080/api/tickets`
-```
-{
-    "id": "T005",
-    "title": "Printer not responding",
-    "description": "The department printer in Room 302 is jammed and throwing an offline error code.",
-    "category": "Hardware",
-    "priority": "MEDIUM",
-    "status": "OPEN",
-    "createdBy": "annie@company.com",
-    "createdAt": "2026-07-04"
-}
-```
+**2. Why should an application use its own database user instead of the root administrator?**
 
-**One example of an error response**
+The app only needs read/write on its own database, not full cluster control. If the app's credentials leak, the damage is confined to one database rather than the entire server. 
 
-`POST http://localhost:8080/api/tickets`
-```
-{
-    "errors": [
-        {
-            "field": "title",
-            "message": "Title is required"
-        },
-        {
-            "field": "priority",
-            "message": "Priority is required"
-        },
-        {
-            "field": "category",
-            "message": "Category is required"
-        },
-        {
-            "field": "description",
-            "message": "Description is required"
-        },
-        {
-            "field": "createdBy",
-            "message": "CreatedBy is required"
-        }
-    ],
-    "message": "Validation failed"
-}
-```
+**3. What is the difference between authentication and authorization?**
+
+Authentication verifies who you are (validating identity via username/password). Authorization determines what you're allowed to do (which databases/actions your assigned roles permit)
+
+**4. What would happen if authentication was disabled on a production database?**
+
+Anyone able to reach the server's port could connect anonymously with full access which include reading, modifying, or deleting all data, and creating/dropping users.
+
