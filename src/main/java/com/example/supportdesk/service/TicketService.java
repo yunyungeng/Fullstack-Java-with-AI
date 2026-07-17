@@ -1,13 +1,13 @@
-package com.example.assettracker.service;
+package com.example.supportdesk.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.assettracker.dto.CreateTicketRequest;
-import com.example.assettracker.dto.TicketResponse;
 import com.example.assettracker.exception.ResourceNotFoundException;
+import com.example.supportdesk.dto.CreateTicketRequest;
+import com.example.supportdesk.dto.TicketResponse;
 
 @Service
 public class TicketService {

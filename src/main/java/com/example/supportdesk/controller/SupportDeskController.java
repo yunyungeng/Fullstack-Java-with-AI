@@ -1,11 +1,11 @@
-package com.example.assettracker.controller;
+package com.example.supportdesk.controller;
 
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-/* 
-@RestController
+// import org.springframework.web.bind.annotation.RestController;
+
+// @RestController
 public class SupportDeskController {
     @GetMapping("/api/health")
     public Map<String, String> health() {
@@ -23,4 +23,4 @@ public class SupportDeskController {
             "description", "API for managing IT support tickets"
         );
     }
-}*/
+}

@@ -1,4 +1,4 @@
-package com.example.assettracker.controller;
+package com.example.supportdesk.controller;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.assettracker.dto.CreateTicketRequest;
-import com.example.assettracker.dto.TicketResponse;
-import com.example.assettracker.service.TicketService;
+import com.example.supportdesk.dto.CreateTicketRequest;
+import com.example.supportdesk.dto.TicketResponse;
+import com.example.supportdesk.service.TicketService;
 
 import jakarta.validation.Valid;
 
