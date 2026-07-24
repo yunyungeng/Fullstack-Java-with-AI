@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 // @RestController
 public class SupportDeskController {
-    @GetMapping("/api/health")
+    @GetMapping("/api/support/health")
     public Map<String, String> health() {
         return Map.of(
             "status", "UP",
@@ -15,7 +15,7 @@ public class SupportDeskController {
         );
     }
 
-    @GetMapping("/api/about") 
+    @GetMapping("/api/support/about") 
     public Map<String, String> about() {
         return Map.of(
             "appName", "Support Desk API",

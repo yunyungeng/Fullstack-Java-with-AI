@@ -1,5 +1,7 @@
 package com.example.supportdesk.model;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,9 +15,9 @@ public class Ticket {
     private String priority;
     private String status;
     private String createdBy;
-    private String createdAt;
+    private LocalDateTime createdAt;
 
-    public Ticket(String title, String description, String category, String priority, String status, String createdBy, String createdAt) {
+    public Ticket(String title, String description, String category, String priority, String status, String createdBy, LocalDateTime createdAt) {
         this.title = title;
         this.description = description;
         this.category = category;
@@ -85,11 +87,11 @@ public class Ticket {
         this.createdBy = createdBy;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 }

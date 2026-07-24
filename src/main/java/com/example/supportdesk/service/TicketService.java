@@ -1,5 +1,6 @@
 package com.example.supportdesk.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -35,15 +36,15 @@ public class TicketService {
 
     public TicketResponse createTicket(CreateTicketRequest request) {
         Ticket ticket = new Ticket(
-            request.getTitle(),
-            request.getDescription(),
-            request.getCategory(),
-            request.getPriority(),
+            request.getTitle().trim(),
+            request.getDescription().trim(),
+            request.getCategory().trim(),
+            request.getPriority().trim(),
             "OPEN",
-            request.getCreatedBy(),
-            "2026-07-04" // Set a default date or use the current date
+            request.getCreatedBy().trim(),   
+            LocalDateTime.now()  
         );
-        
+
         Ticket savedTicket = ticketRepository.save(ticket);
         return toResponse(savedTicket);
     }

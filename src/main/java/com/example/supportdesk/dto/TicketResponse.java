@@ -1,5 +1,7 @@
 package com.example.supportdesk.dto;
 
+import java.time.LocalDateTime;
+
 public class TicketResponse {
     private String id;
     private String title;
@@ -8,9 +10,9 @@ public class TicketResponse {
     private String priority;
     private String status;
     private String createdBy;
-    private String createdAt;
+    private LocalDateTime createdAt;
 
-    public TicketResponse(String id, String title, String description, String category, String priority, String status, String createdBy, String createdAt) {
+    public TicketResponse(String id, String title, String description, String category, String priority, String status, String createdBy, LocalDateTime createdAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -50,7 +52,7 @@ public class TicketResponse {
         return createdBy;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 }
