@@ -1,27 +1,41 @@
 ### Health check
 GET http://localhost:8080/api/health
 
-### About check
-GET http://localhost:8080/api/about
 
-### GET all assets
+### Get all assets from MongoDB
 GET http://localhost:8080/api/assets
 
-### Get one asset
-GET http://localhost:8080/api/assets/A002
 
-### Get one asset that doesn't exist
-GET http://localhost:8080/api/assets/23232
+### Get one asset
+# Replace the ID below with an actual ID returned by GET /api/assets
+GET http://localhost:8080/api/assets/REPLACE_WITH_REAL_ID
+
+
+### Get missing asset
+GET http://localhost:8080/api/assets/000000000000000000000000
+
 
 ### Create a valid asset
 POST http://localhost:8080/api/assets
 Content-Type: application/json
 
 {
-    "assetTag": "",
-    "name": "",
-    "category": "",
-    "serialNumber": "",
-    "status": "",
-    "location": ""
-  }
+  "assetTag": "TAB-2026-001",
+  "name": "Samsung Galaxy Tab",
+  "category": "Tablet",
+  "serialNumber": "SN-TAB-001",
+  "location": "HQ Level 4"
+}
+
+
+### Create an invalid asset
+POST http://localhost:8080/api/assets
+Content-Type: application/json
+
+{
+  "assetTag": "",
+  "name": "",
+  "category": "",
+  "serialNumber": "",
+  "location": ""
+}

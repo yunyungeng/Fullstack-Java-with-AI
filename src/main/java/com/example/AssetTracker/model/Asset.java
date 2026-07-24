@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Asset {
     @Id
     private String id;
+
     private String assetTag;
     private String name;
     private String category;
@@ -18,8 +19,7 @@ public class Asset {
     public Asset() {
     }
 
-    public Asset(String id, String assetTag, String name, String category, String serialNumber, String status, String location, String assignedTo) {
-        this.id = id;
+    public Asset(String assetTag, String name, String category, String serialNumber, String status, String location, String assignedTo) {
         this.assetTag = assetTag;
         this.name = name;
         this.category = category;
