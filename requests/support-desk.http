@@ -1,5 +1,8 @@
-### Health check
-GET http://localhost:8080/api/health
+### Get all tickets
+GET http://localhost:8080/api/tickets
 
-### Test the About Endpoint
-GET http://localhost:8080/api/about
+### Get one ticket by ID 
+GET http://localhost:8080/api/tickets/6a599e594004cddb459c5681
+
+### Get a missing ticket
+GET http://localhost:8080/api/tickets/000000000000000000000000

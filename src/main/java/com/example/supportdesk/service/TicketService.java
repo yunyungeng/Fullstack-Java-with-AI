@@ -1,6 +1,5 @@
 package com.example.supportdesk.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,65 +7,34 @@ import org.springframework.stereotype.Service;
 import com.example.assettracker.exception.ResourceNotFoundException;
 import com.example.supportdesk.dto.CreateTicketRequest;
 import com.example.supportdesk.dto.TicketResponse;
+import com.example.supportdesk.model.Ticket;
+import com.example.supportdesk.repository.TicketRepository;
 
 @Service
 public class TicketService {
-    private final List<TicketResponse> tickets = new ArrayList<>();
-    private int ticketIdCounter = 4; // 
+    private final TicketRepository ticketRepository;
 
-    public TicketService() {
-        tickets.add(new TicketResponse(
-            "T001",
-            "Cannot access email",
-            "User cannot login to company email account.",
-            "Email",
-            "HIGH",
-            "OPEN",
-            "amir@example.com",
-            "2026-07-03"
-        ));
-
-        tickets.add(new TicketResponse(
-            "T002",
-            "Laptop is slow",
-            "Operating system takes over 10 minutes to boot completely.",
-            "Hardware",
-            "LOW",
-            "OPEN",
-            "siti@example.com",
-            "2026-07-04"
-        ));
-
-        tickets.add(new TicketResponse(
-            "T003",
-            "VPN connection not working",
-            "Intermittent disconnections when attempting remote network access.",
-            "Network",
-            "HIGH",
-            "OPEN",
-            "john@example.com",
-            "2026-07-04"
-        ));
+    public TicketService(TicketRepository ticketRepository) {
+        this.ticketRepository = ticketRepository;
     }
 
     public List<TicketResponse> getAllTickets() {
-        return tickets;
+        return ticketRepository.findAll()
+        .stream()
+        .map(this::toResponse)
+        .toList();
     }
 
     // Find a single ticket by ID or throw an error
     public TicketResponse getTicketById(String id) {
-        return tickets.stream()
-                .filter(ticket -> ticket.getId().equalsIgnoreCase(id))
-                .findFirst()
+        Ticket ticket = ticketRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket " + id + " was not found"));
+        
+            return toResponse(ticket);
     }
 
     public TicketResponse createTicket(CreateTicketRequest request) {
-        // Generate a new ticket ID
-        String generatedId = String.format("T%03d", ticketIdCounter++);
-
-        TicketResponse newTicket = new TicketResponse(
-            generatedId,
+        Ticket ticket = new Ticket(
             request.getTitle(),
             request.getDescription(),
             request.getCategory(),
@@ -76,7 +44,23 @@ public class TicketService {
             "2026-07-04" // Set a default date or use the current date
         );
         
-        tickets.add(newTicket);
-        return newTicket;
+        Ticket savedTicket = ticketRepository.save(ticket);
+        return toResponse(savedTicket);
+    }
+
+    // Helper to convert an Asset entity to an AssetResponse DTO.
+    private TicketResponse toResponse(Ticket ticket) {
+        return new TicketResponse(
+            ticket.getId(),
+            ticket.getTitle(),
+            ticket.getDescription(),
+            ticket.getCategory(),
+            ticket.getPriority(),
+            ticket.getStatus(),
+            ticket.getCreatedBy(),
+            ticket.getCreatedAt()
+        );
     }
 }
+
+           
