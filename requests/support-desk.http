@@ -1,4 +1,4 @@
-### Get all tickets
+### Get all tickets from MongoDB
 GET http://localhost:8080/api/tickets
 
 ### Get one ticket by ID 
@@ -7,16 +7,25 @@ GET http://localhost:8080/api/tickets/6a599e594004cddb459c5681
 ### Get a missing ticket
 GET http://localhost:8080/api/tickets/000000000000000000000000
 
+### Filter tickets by status
+GET http://localhost:8080/api/tickets?status=OPEN
+
+### Filter tickets by category
+GET http://localhost:8080/api/tickets?category=Email
+
+### Filter tickets by priority
+GET http://localhost:8080/api/tickets?priority=HIGH
+
 ### Create a valid ticket
 POST http://localhost:8080/api/tickets
 Content-Type: application/json
 
 {
-  "title": "Cannot access email",
-  "description": "User cannot login to company email account.",
-  "category": "Email",
-  "priority": "HIGH",
-  "createdBy": "amir@example.com"
+  "title": "Slow internet connection",
+  "description": "Download and upload speeds are significantly below contracted bandwidth.",
+  "category": "Network",
+  "priority": "LOW",
+  "createdBy": "tomer@example.com"
 }
 
 ### Create an invalid ticket -> expect 400
