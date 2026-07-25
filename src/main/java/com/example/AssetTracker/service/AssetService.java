@@ -2,6 +2,10 @@ package com.example.assettracker.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.assettracker.dto.AssetResponse;
@@ -31,11 +35,38 @@ public class AssetService {
 
     // Return all assets. Note: returning the internal list directly is simple
     // for learning but would be unsafe in a concurrent production app.
-    public List<AssetResponse> getAllAssets() {
-        return assetRepository.findAll()
-            .stream()
+    public List<AssetResponse> getAssets(String status, String category, String location) {
+        List<Asset> assets;
+
+        if (hasValue(status)) {
+            assets = assetRepository.findByStatusIgnoreCase(status.trim());
+        } else if (hasValue(category)) {
+            assets = assetRepository.findByCategoryIgnoreCase(category.trim());
+        } else if (hasValue(location)) {
+            assets = assetRepository.findByLocationContainsIgnoreCase(location.trim());
+        } else {
+            assets = assetRepository.findAll();
+        }
+
+        return assets.stream()
             .map(this::toResponse)
             .toList();
+    }
+
+    public Page<AssetResponse> getAssetsPaged(int page, int size, String sortBy, String direction) {
+        // Implement pagination logic here using the repository
+        // For example, you can use Pageable and PageRequest to fetch paginated results
+        // and then map them to AssetResponse DTOs.
+        // This is a placeholder implementation; you would need to implement the actual logic.
+        
+        Sort sort = direction.equalsIgnoreCase("desc") 
+            ? Sort.by(sortBy).descending() 
+            : Sort.by(sortBy).ascending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return assetRepository.findAll(pageable)
+            .map(this::toResponse); 
     }
 
     // Find an asset by id or throw a ResourceNotFoundException which is
@@ -55,13 +86,17 @@ public class AssetService {
             request.getName().trim(),
             request.getCategory().trim(),
             request.getSerialNumber().trim(),
-            "Available",  // default status
+            "AVAILABLE",  // default status
             request.getLocation().trim(),
             null  // default assignedTo is null (not assigned yet)
         );
 
         Asset savedAsset = assetRepository.save(asset);
         return toResponse(savedAsset);
+    }
+
+    private boolean hasValue(String value) {
+        return value != null && !value.trim().isBlank();
     }
 
     // Helper to convert an Asset entity to an AssetResponse DTO.
