@@ -2,6 +2,7 @@ package com.example.supportdesk.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,16 @@ public class TicketController {
         @RequestParam(required = false) String priority
     ) {
         return ticketService.getTickets(status, category, priority);
+    }
+
+    @GetMapping("/paged")
+    public Page<TicketResponse> getTicketsPaged(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size,
+        @RequestParam(defaultValue = "createdAt") String sortBy,
+        @RequestParam(defaultValue = "desc") String direction
+    ) {
+        return ticketService.getTicketsPaged(page, size, sortBy, direction);
     }
 
     @GetMapping("/{id}")

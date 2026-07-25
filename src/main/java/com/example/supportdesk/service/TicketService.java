@@ -42,11 +42,6 @@ public class TicketService {
     }
 
     public Page<TicketResponse> getTicketsPaged(int page, int size, String sortBy, String direction) {
-        // Implement pagination logic here using the repository
-        // For example, you can use Pageable and PageRequest to fetch paginated results
-        // and then map them to TicketResponse DTOs.
-        // This is a placeholder implementation; you would need to implement the actual logic.
-        
         Sort sort = direction.equalsIgnoreCase("desc")
             ? Sort.by(sortBy).descending()
             : Sort.by(sortBy).ascending();

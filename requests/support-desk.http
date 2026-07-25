@@ -16,6 +16,12 @@ GET http://localhost:8080/api/tickets?category=Email
 ### Filter tickets by priority
 GET http://localhost:8080/api/tickets?priority=HIGH
 
+### Get paged tickets
+GET http://localhost:8080/api/tickets/paged?page=0&size=5
+
+### Get paged tickets with sorted by CreatedAt in descending order
+GET http://localhost:8080/api/tickets/paged?page=0&size=5&sortBy=createdAt&direction=desc
+
 ### Create a valid ticket
 POST http://localhost:8080/api/tickets
 Content-Type: application/json
