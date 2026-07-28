@@ -3,18 +3,31 @@ package com.example.supportdesk.model;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "tickets")
 public class Ticket {
     @Id
     private String id;
+    
     private String title;
+
     private String description;
+
+    @Indexed
     private String category;
+
+    @Indexed
     private String priority;
+
+    @Indexed
     private String status;
+
+    @Indexed
     private String createdBy;
+
+    @Indexed
     private LocalDateTime createdAt;
 
     public Ticket(String title, String description, String category, String priority, String status, String createdBy, LocalDateTime createdAt) {
