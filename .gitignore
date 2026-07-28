@@ -55,6 +55,7 @@ build/
 *.war
 *.ear
 application-local.properties
+application-supportdesk.properties
 application-local.yml
 application-dev-local.properties
 application-dev-local.yml
