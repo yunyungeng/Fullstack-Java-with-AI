@@ -2,6 +2,8 @@ package com.example.assettracker.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +28,8 @@ import com.example.assettracker.repository.AssetRepository;
 @Service
 public class AssetService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AssetService.class);
+
     // In-memory data store used for teaching/demo purposes only
     private final AssetRepository assetRepository;
 
@@ -36,6 +40,7 @@ public class AssetService {
     // Return all assets. Note: returning the internal list directly is simple
     // for learning but would be unsafe in a concurrent production app.
     public List<AssetResponse> getAssets(String status, String category, String location) {
+        logger.info("Fetching assets with status={}, category={}, location={}", status, category, location);
         List<Asset> assets;
 
         if (hasValue(status)) {
@@ -48,6 +53,8 @@ public class AssetService {
             assets = assetRepository.findAll();
         }
 
+        logger.info("Found {} asset(s)", assets.size());
+
         return assets.stream()
             .map(this::toResponse)
             .toList();
@@ -59,6 +66,8 @@ public class AssetService {
         // and then map them to AssetResponse DTOs.
         // This is a placeholder implementation; you would need to implement the actual logic.
         
+        logger.info("Fetching paged assets page={}, size={}, sortBy={}, direction={}", page, size, sortBy, direction);
+
         Sort sort = direction.equalsIgnoreCase("desc") 
             ? Sort.by(sortBy).descending() 
             : Sort.by(sortBy).ascending();
@@ -72,11 +81,13 @@ public class AssetService {
     // Find an asset by id or throw a ResourceNotFoundException which is
     // handled globally by GlobalExceptionHandler.
     public AssetResponse getAssetById(String id) {
+        logger.info("Fetching asset by id={}", id);
+        
         Asset asset = assetRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Asset " + id + " was not found"));
 
         return toResponse(asset);
-    }
+    } 
 
     // Create a new asset from the request DTO. Demonstrates simple mapping
     // from request -> response DTO and updating the in-memory store.
