@@ -2,7 +2,7 @@
 GET http://localhost:8080/api/tickets
 
 ### Get one ticket by ID 
-GET http://localhost:8080/api/tickets/6a599e594004cddb459c5681
+GET http://localhost:8080/api/tickets/6a641439cceaa7a7cdbaf179
 
 ### Get a missing ticket
 GET http://localhost:8080/api/tickets/000000000000000000000000
@@ -16,8 +16,11 @@ GET http://localhost:8080/api/tickets?category=Email
 ### Filter tickets by priority
 GET http://localhost:8080/api/tickets?priority=HIGH
 
-### Get paged tickets
+### Paged - first page
 GET http://localhost:8080/api/tickets/paged?page=0&size=5
+
+### Paged - second page
+GET http://localhost:8080/api/tickets/paged?page=1&size=5
 
 ### Get paged tickets with sorted by CreatedAt in descending order
 GET http://localhost:8080/api/tickets/paged?page=0&size=5&sortBy=createdAt&direction=desc
@@ -27,11 +30,11 @@ POST http://localhost:8080/api/tickets
 Content-Type: application/json
 
 {
-  "title": "Slow internet connection",
-  "description": "Download and upload speeds are significantly below contracted bandwidth.",
-  "category": "Network",
-  "priority": "LOW",
-  "createdBy": "tomer@example.com"
+  "title": "Laptop screen flickering and turning black",
+  "description": "Laptop screen started flickering and occasionally goes completely black for 5 to 10 seconds at a time",
+  "category": "Hardware",
+  "priority": "High",
+  "createdBy": "sarah@company.com"
 }
 
 ### Create an invalid ticket -> expect 400
