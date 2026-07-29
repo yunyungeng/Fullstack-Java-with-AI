@@ -16,14 +16,8 @@ package com.example.assettracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication // Combines @Configuration, @EnableAutoConfiguration, @ComponentScan
-@ComponentScan(basePackages = {"com.example.assettracker"})
-@EnableMongoRepositories(basePackages = {
-    "com.example.assettracker.repository"
-})
 public class AssetTrackerApplication {
 
     // The JVM starts here. SpringApplication.run boots the whole app.
