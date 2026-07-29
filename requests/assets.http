@@ -1,58 +1,33 @@
-### Health check
-GET http://localhost:8080/api/health
+### Day 9 - JWT Authentication Tests
+### Run the app first:
+### Base URL: 
 
+@baseUrl = http://localhost:8080
 
-### Get all assets from MongoDB
-GET http://localhost:8080/api/assets
+### 1. Health Check - public endpoint
+GET {{baseUrl}}/api/health
 
+#### 2. Try to access assets without token - should return 401 Unauthorized
+GET {{baseUrl}}/api/assets
 
-### Get one asset
-# Replace the ID below with an actual ID returned by GET /api/assets
-GET http://localhost:8080/api/assets/REPLACE_WITH_REAL_ID
-
-
-### Get missing asset
-GET http://localhost:8080/api/assets/000000000000000000000000
-
-### Filter assets by status
-GET http://localhost:8080/api/assets?status=AVAILABLE
-
-### Filter assets by category
-GET http://localhost:8080/api/assets?category=Smartphone
-
-### Filter assets by location
-GET http://localhost:8080/api/assets?location=HQ%20Level%203
-
-### Get paged assets
-GET http://localhost:8080/api/assets/paged?page=0&size=5
-
-### Get paged assets with sorted by name in descending order 
-GET http://localhost:8080/api/assets/paged?page=0&size=5&sortBy=name&direction=desc
-
-### Get paged assets with sorted by category in ascending order
-GET http://localhost:8080/api/assets/paged?page=0&size=5&sortBy=category&direction=asc
-
-### Create a valid asset
-POST http://localhost:8080/api/assets
+### 3. Register a regular user - should return token with role USER
+POST {{baseUrl}}/api/auth/register
 Content-Type: application/json
-
 {
-  "assetTag": "TAB-2026-002",
-  "name": "Apple iPad Pro",
-  "category": "Tablet",
-  "serialNumber": "SN-TAB-002",
-  "location": "HQ Level 7"
+  "name": "Normal User",
+  "email": "user@example.com",
+  "password": "User@12345"
 }
 
-
-### Create an invalid asset
-POST http://localhost:8080/api/assets
+### 4. Login as regular user - should return token with role USER
+POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
-
 {
-  "assetTag": "",
-  "name": "",
-  "category": "",
-  "serialNumber": "",
-  "location": ""
+  "email": "user@example.com",
+  "password": "User@12345"
 }
+
+### 5. Get assets with user token - should return 200 OK
+@userToken = REPLACE_WITH_USER_TOKEN
+GET {{baseUrl}}/api/assets
+Authorization: Bearer {{userToken}}

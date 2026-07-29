@@ -20,10 +20,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication // Combines @Configuration, @EnableAutoConfiguration, @ComponentScan
-@ComponentScan(basePackages = {"com.example.assettracker", "com.example.supportdesk"})
+@ComponentScan(basePackages = {"com.example.assettracker"})
 @EnableMongoRepositories(basePackages = {
-    "com.example.assettracker.repository",
-    "com.example.supportdesk.repository"
+    "com.example.assettracker.repository"
 })
 public class AssetTrackerApplication {
 
