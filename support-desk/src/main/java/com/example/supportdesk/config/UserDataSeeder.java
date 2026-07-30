@@ -18,7 +18,7 @@ public class UserDataSeeder {
     CommandLineRunner seedUserData(AppUserRepository appUserRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             createUserIfMissing(appUserRepository, passwordEncoder, 
-                "Admin User - Support Desk",
+                "Admin User - SupportDesk",
                 "admin@example.com",
                 "Admin@12345",
                 "ADMIN"
@@ -35,7 +35,7 @@ public class UserDataSeeder {
         String role) {
         
         if (appUserRepository.existsByEmailIgnoreCase(email)) {
-            logger.info("Seed user already exists: {}", email);
+            logger.info("Seed user already exists = {}", email);
             return;
         }
 
