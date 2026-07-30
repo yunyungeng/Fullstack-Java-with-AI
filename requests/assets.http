@@ -13,6 +13,7 @@ GET {{baseUrl}}/api/assets
 ### 3. Register a regular user - should return token with role USER
 POST {{baseUrl}}/api/auth/register
 Content-Type: application/json
+
 {
   "name": "Normal User",
   "email": "user@example.com",
@@ -22,6 +23,7 @@ Content-Type: application/json
 ### 4. Login as regular user - should return token with role USER
 POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
+
 {
   "email": "user@example.com",
   "password": "User@12345"
@@ -36,6 +38,7 @@ Authorization: Bearer PLACE_WITH_USER_TOKEN
 POST {{baseUrl}}/api/assets
 Authorization: Bearer PLACE_WITH_USER_TOKEN
 Content-Type: application/json
+
 {
   "assetTag": "CAM-2026-2001",
   "name": "Logitech Webcam",
@@ -48,6 +51,7 @@ Content-Type: application/json
 ### Seeded admin credentials: admin@example.com / Admin@12345
 POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
+
 {
   "email": "admin@example.com",
   "password": "Admin@12345"
@@ -58,6 +62,7 @@ Content-Type: application/json
 POST {{baseUrl}}/api/assets
 Authorization: Bearer PLACE_ADMIN_TOKEN_HERE
 Content-Type: application/json
+
 {
   "assetTag": "CAM-2026-3001",
   "name": "Logitech Brio Webcam",
@@ -69,6 +74,7 @@ Content-Type: application/json
 ### 9. Login with wrong password - should return 401 Unauthorized
 POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
+
 {
   "email": "admin@example.com",
   "password": "wrong-password"
@@ -77,6 +83,7 @@ Content-Type: application/json
 ### 10. Register duplicate email - should return 409 Conflict
 POST {{baseUrl}}/api/auth/register
 Content-Type: application/json
+
 {
   "name": "Duplicate User",
   "email": "user@example.com",
