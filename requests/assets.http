@@ -32,18 +32,18 @@ Content-Type: application/json
 ### 5. Get assets with user token - should return 200 OK
 ### Replace PLACE_WITH_USER_TOKEN with token received from login/register response 
 GET {{baseUrl}}/api/assets
-Authorization: Bearer PLACE_WITH_USER_TOKEN
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1MzgxMDU3LCJpYXQiOjE3ODUzNzc0NTcsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.XBZvNOzzRSjHhjnPp5d_dwhNCeaHlEOq8ehMenDvz6g
 
 ### 6. Try to create asset with USER token - should return 403 Forbidden
 POST {{baseUrl}}/api/assets
-Authorization: Bearer PLACE_WITH_USER_TOKEN
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1MzgxMDU3LCJpYXQiOjE3ODUzNzc0NTcsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.XBZvNOzzRSjHhjnPp5d_dwhNCeaHlEOq8ehMenDvz6g
 Content-Type: application/json
 
 {
   "assetTag": "CAM-2026-2001",
   "name": "Logitech Webcam",
   "category": "Camera",
-  "SerialNumber": "SN-CAM-2001",
+  "serialNumber": "SN-CAM-2001",
   "location": "HQ Level 2"
 }
 
@@ -60,14 +60,14 @@ Content-Type: application/json
 ### 8. Create asset with ADMIN token - should return 201 Created
 ### Replace PLACE_ADMIN_TOKEN_HERE with token from admin login response
 POST {{baseUrl}}/api/assets
-Authorization: Bearer PLACE_ADMIN_TOKEN_HERE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlzcyI6ImFzc2V0LXRyYWNrZXIiLCJuYW1lIjoiQWRtaW4gVXNlciIsImV4cCI6MTc4NTM4MTIzNSwiaWF0IjoxNzg1Mzc3NjM1LCJ1c2VySWQiOiI2YTZhYWQwZGRiYmRkZmZlYWI3NDU0MWUifQ.i7cv50edMaidEjwawGnZ4rO06nXo1lcVlz0pTHJ_jPE
 Content-Type: application/json
 
 {
   "assetTag": "CAM-2026-3001",
   "name": "Logitech Brio Webcam",
   "category": "Camera",
-  "SerialNumber": "SN-CAM-3001",
+  "serialNumber": "SN-CAM-3001",
   "location": "HQ Level 2"
 }
 
