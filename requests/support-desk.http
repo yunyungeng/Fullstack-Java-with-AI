@@ -1,50 +1,46 @@
-### Get all tickets from MongoDB
+#### Try to access tickets without token - should return 401 Unauthorized
 GET http://localhost:8080/api/tickets
 
-### Get one ticket by ID 
-GET http://localhost:8080/api/tickets/6a641439cceaa7a7cdbaf179
-
-### Get a missing ticket
-GET http://localhost:8080/api/tickets/000000000000000000000000
-
-### Filter tickets by status
-GET http://localhost:8080/api/tickets?status=OPEN
-
-### Filter tickets by category
-GET http://localhost:8080/api/tickets?category=Email
-
-### Filter tickets by priority
-GET http://localhost:8080/api/tickets?priority=HIGH
-
-### Paged - first page
-GET http://localhost:8080/api/tickets/paged?page=0&size=5
-
-### Paged - second page
-GET http://localhost:8080/api/tickets/paged?page=1&size=5
-
-### Get paged tickets with sorted by CreatedAt in descending order
-GET http://localhost:8080/api/tickets/paged?page=0&size=5&sortBy=createdAt&direction=desc
-
-### Create a valid ticket
-POST http://localhost:8080/api/tickets
+### Tasks
+### 1. Register success -> expect 201 with a token
+POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "title": "Laptop screen flickering and turning black",
-  "description": "Laptop screen started flickering and occasionally goes completely black for 5 to 10 seconds at a time",
-  "category": "Hardware",
-  "priority": "High",
-  "createdBy": "sarah@company.com"
+  "name": "Amir",
+  "email": "amir@example.com",
+  "password": "password123"
 }
-
-### Create an invalid ticket -> expect 400
-POST http://localhost:8080/api/tickets
+### eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODUzODgzOTIsImlhdCI6MTc4NTM4NDc5MiwidXNlcklkIjoiNmE2YWNmNThkNTY2ZjJjZjJjMmRkOGJmIn0.M9Nx4Ty6HjxOCjEqbhK9sUTsXh-d24ztYCYJjEt3WbY
+### 2. Login success -> expect 200 with a token
+POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
 {
-  "title": "",
-  "description": "",
-  "category": "",
-  "priority": "",
-  "createdBy": ""
+  "email": "amir@example.com",
+  "password": "password123"
 }
+
+### 3. Duplicate email -> expect 409
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Amir Again",
+  "email": "amir@example.com",
+  "password": "password123"
+}
+
+### 4. Wrong password -> expect 401
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "amir@example.com",
+  "password": "wrongpassword"
+}
+
+### 5. Get tickets with token -> expect 200
+#### Try to access tickets without token - should return 401 Unauthorized
+GET http://localhost:8080/api/tickets
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODUzODkyODcsImlhdCI6MTc4NTM4NTY4NywidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.EKOYsIjU9SP_9Z4gAiyaFcfygkFpKptUkDFECdOPyNc
