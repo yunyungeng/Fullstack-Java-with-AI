@@ -1,6 +1,3 @@
-#### Try to access tickets without token - should return 401 Unauthorized
-GET http://localhost:8080/api/tickets
-
 ### Tasks
 ### 1. Register success -> expect 201 with a token
 POST http://localhost:8080/api/auth/register
@@ -44,3 +41,57 @@ Content-Type: application/json
 #### Try to access tickets without token - should return 401 Unauthorized
 GET http://localhost:8080/api/tickets
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODUzODkyODcsImlhdCI6MTc4NTM4NTY4NywidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.EKOYsIjU9SP_9Z4gAiyaFcfygkFpKptUkDFECdOPyNc
+
+### Exercise 3
+
+### 1. GET tickets WITHOUT token -> expect 401
+GET http://localhost:8080/api/tickets
+
+### 2. Login as USER, copy the token from the response
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "amir@example.com",
+  "password": "password123"
+}
+
+### 3. GET /api/tickets with USER token -> expect 200
+GET http://localhost:8080/api/tickets
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODUzOTIzMjYsImlhdCI6MTc4NTM4ODcyNiwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.c0z4OZUFzlnasJ3D1Nn3-hgLufDFqgxBfZFVN5hTV_o
+
+###  4. POST /api/tickets with USER token -> expect 403
+POST http://localhost:8080/api/tickets
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "title": "Test Ticket",
+  "description": "This is a test ticket",
+  "category": "General Inquiry",
+  "priority": "Medium",
+  "createdBy": "amir@example.com"
+}
+
+### 5. Login as ADMIN
+### Seeded admin credentials: admin@example.com / Admin@12345
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin@12345"
+}
+
+### 6. POST ticket WITH ADMIN token -> expect 201
+POST http://localhost:8080/api/tickets
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+  "title": "Admin Ticket",
+  "description": "This is a ticket created by admin",
+  "category": "Technical Support",
+  "priority": "High",
+  "createdBy": "admin@example.com"
+}
