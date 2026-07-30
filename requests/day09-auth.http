@@ -1,0 +1,68 @@
+### ============================================
+### Day 9 - Authentication Test Evidence
+### Support Desk Ticket API
+### ============================================
+
+### 1. Health endpoint is public (no token) -> 200
+GET http://localhost:8080/api/health
+
+### 2. Ticket endpoint without token -> 401
+GET http://localhost:8080/api/tickets
+
+### 3. Register a normal USER -> returns token (201)
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Amir",
+  "email": "amir@example.com",
+  "password": "password123"
+}
+
+### 4. Login as USER -> returns token (200)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "amir@example.com",
+  "password": "password123"
+}
+
+### 5. Ticket endpoint WITH USER token -> 200
+GET http://localhost:8080/api/tickets
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODUzOTM1MTMsImlhdCI6MTc4NTM4OTkxMywidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0._i6xwaNRCWgML-2FlCUG__zWQj6hAj4G4-TfyN1cj5E
+
+### 6. Create ticket with USER token -> 403 (USER cannot create)
+POST http://localhost:8080/api/tickets
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODUzOTM1MTMsImlhdCI6MTc4NTM4OTkxMywidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0._i6xwaNRCWgML-2FlCUG__zWQj6hAj4G4-TfyN1cj5E
+Content-Type: application/json
+
+{
+  "title": "User attempt",
+  "description": "A normal user trying to create a ticket",
+  "category": "Email",
+  "priority": "HIGH",
+  "createdBy": "amir@example.com"
+}
+
+### 7. Login as ADMIN -> returns token (200)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin@12345"
+}
+
+### 8. Create ticket with ADMIN token -> 201
+POST http://localhost:8080/api/tickets
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlzcyI6ImFzc2V0LXRyYWNrZXIiLCJuYW1lIjoiQWRtaW4gVXNlciAtIFN1cHBvcnREZXNrIiwiZXhwIjoxNzg1MzkzNTgyLCJpYXQiOjE3ODUzODk5ODIsInVzZXJJZCI6IjZhNmFlMjI2YTIxMmY1ZmYzODMzNTJkYyJ9.oOhP8gS3kPl5seNA59_PTrnL2tCuilxFXh0RdvegJBo
+Content-Type: application/json
+
+{
+  "title": "Admin ticket",
+  "description": "An admin creating a ticket",
+  "category": "Email",
+  "priority": "HIGH",
+  "createdBy": "admin@example.com"
+}
