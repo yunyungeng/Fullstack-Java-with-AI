@@ -28,6 +28,57 @@ Content-Type: application/json
 }
 
 ### 5. Get assets with user token - should return 200 OK
-@userToken = REPLACE_WITH_USER_TOKEN
+### Replace PLACE_WITH_USER_TOKEN with token received from login/register response 
 GET {{baseUrl}}/api/assets
-Authorization: Bearer {{userToken}}
+Authorization: Bearer PLACE_WITH_USER_TOKEN
+
+### 6. Try to create asset with USER token - should return 403 Forbidden
+POST {{baseUrl}}/api/assets
+Authorization: Bearer PLACE_WITH_USER_TOKEN
+Content-Type: application/json
+{
+  "assetTag": "CAM-2026-2001",
+  "name": "Logitech Webcam",
+  "category": "Camera",
+  "SerialNumber": "SN-CAM-2001",
+  "location": "HQ Level 2"
+}
+
+### 7. Login seeded admin user - copy token from response
+### Seeded admin credentials: admin@example.com / Admin@12345
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+{
+  "email": "admin@example.com",
+  "password": "Admin@12345"
+}
+
+### 8. Create asset with ADMIN token - should return 201 Created
+### Replace PLACE_ADMIN_TOKEN_HERE with token from admin login response
+POST {{baseUrl}}/api/assets
+Authorization: Bearer PLACE_ADMIN_TOKEN_HERE
+Content-Type: application/json
+{
+  "assetTag": "CAM-2026-3001",
+  "name": "Logitech Brio Webcam",
+  "category": "Camera",
+  "SerialNumber": "SN-CAM-3001",
+  "location": "HQ Level 2"
+}
+
+### 9. Login with wrong password - should return 401 Unauthorized
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+{
+  "email": "admin@example.com",
+  "password": "wrong-password"
+}
+
+### 10. Register duplicate email - should return 409 Conflict
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+{
+  "name": "Duplicate User",
+  "email": "user@example.com",
+  "password": "User@12345"
+}
