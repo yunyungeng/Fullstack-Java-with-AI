@@ -50,8 +50,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/health").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/docs/**").permitAll()
+                        .requestMatchers("/api/v1/info").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/tickets/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/tickets").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/tickets/**", "/api/v1/tickets/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/tickets").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/api/v1/reports/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
