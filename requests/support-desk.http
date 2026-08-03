@@ -44,3 +44,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsI
 ### Report count of tickets by status -> 200 
 GET http://localhost:8080/api/v1/reports/tickets-by-status
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU3MzI2MDksImlhdCI6MTc4NTcyOTAwOSwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.YQOh70kHTC8lPrqYlwQz4ZksUQzEy78Qn5P--b-ZmvY
+
+### Exercise 3
+### Report count of tickets by priority -> 200 
+GET http://localhost:8080/api/v1/reports/tickets-by-priority
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU3MzI2MDksImlhdCI6MTc4NTcyOTAwOSwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.YQOh70kHTC8lPrqYlwQz4ZksUQzEy78Qn5P--b-ZmvY
+

@@ -28,6 +28,11 @@ public class TicketReportService {
         return countTicketsByField("status");
     }
 
+    public List<ReportCountResponse> countTicketsByPriority() {
+        logger.info("Generating ticket count report by priority");
+        return countTicketsByField("priority");
+    }
+
     private List<ReportCountResponse> countTicketsByField(String fieldName) {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.group(fieldName).count().as("count"),

@@ -11,3 +11,9 @@ Because existing clients (mobile apps, other services, scripts) are already call
 **Why is a grouped report endpoint better than asking the frontend to download all tickets and count them manually?**
 
 The database counts server-side and returns just a few summary rows, instead of sending thousands of full tickets over the network for the browser to count. It's faster, uses less bandwidth and memory, and scales as ticket volume grows.
+
+## Exercise 3: Create a Ticket Report by Priority
+
+**How could this report help a support manager decide where to assign staff?**
+
+It shows where the workload is concentrated. A large HIGH-priority count signals urgent tickets that need more staff directed there quickly, while mostly LOW-priority means resources can be spread more evenly. It turns raw tickets into a quick view for staffing decisions.
