@@ -1,55 +1,98 @@
-### 1. v1 tickets WITHOUT token -> 401
-GET http://localhost:8080/api/v1/tickets
+### Day 10: API Quality, Versioning, Docs and Reports
+### Run the app first: ./mvnw spring-boot:run
 
-### Login as USER to get a token
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
+### Public health check
+GET http://localhost:8080/api/health
 
-{ 
-    "email": "amir@example.com", 
-    "password": "password123" 
-}
+### Public API information
+GET http://localhost:8080/api/v1/info
 
-### Login as ADMIN to get a token
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
+### Public API documentation endpoint
+GET http://localhost:8080/api/docs
 
-{ 
-    "email": "admin@example.com", 
-    "password": "Admin@12345" 
-}
-
-### 2. v1 tickets WITH token -> 200
-GET http://localhost:8080/api/v1/tickets
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU3MzI2MDksImlhdCI6MTc4NTcyOTAwOSwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.YQOh70kHTC8lPrqYlwQz4ZksUQzEy78Qn5P--b-ZmvY
-
-### 2b. Create via v1 with ADMIN token -> 201 
-POST http://localhost:8080/api/v1/tickets
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlzcyI6ImFzc2V0LXRyYWNrZXIiLCJuYW1lIjoiQWRtaW4gVXNlciAtIFN1cHBvcnREZXNrIiwiZXhwIjoxNzg1NTY4NzcwLCJpYXQiOjE3ODU1NjUxNzAsInVzZXJJZCI6IjZhNmFlMjI2YTIxMmY1ZmYzODMzNTJkYyJ9.-oCI1r2QOdSrd0Z3rUmfOT5MBVvHd3-Mh4xQ5fcTpM0
+### Register a new user / Duplicate
+POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "title": "Laptop not booting",
-  "description": "The laptop fails to boot after the latest update. It shows a black screen and does not respond to any key presses.",
-  "category": "Hardware",
-  "priority": "HIGH",
-  "createdBy": "admin@example.com"
+  "name": "John Wick",
+  "email": "johnwick@example.com",
+  "password": "password123"
 }
 
-### 3. Old /api/tickets still works with token -> 200
-GET http://localhost:8080/api/tickets
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlzcyI6ImFzc2V0LXRyYWNrZXIiLCJuYW1lIjoiQWRtaW4gVXNlciAtIFN1cHBvcnREZXNrIiwiZXhwIjoxNzg1NTY4NzcwLCJpYXQiOjE3ODU1NjUxNzAsInVzZXJJZCI6IjZhNmFlMjI2YTIxMmY1ZmYzODMzNTJkYyJ9.-oCI1r2QOdSrd0Z3rUmfOT5MBVvHd3-Mh4xQ5fcTpM0
+### Login as seeded admin
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
 
-### Exercise 2
-### Report count of tickets by status -> 200 
+{
+  "email": "admin@example.com",
+  "password": "Admin@12345"
+}
+
+### Copy the token from the login response and paste it below
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlzcyI6ImFzc2V0LXRyYWNrZXIiLCJuYW1lIjoiQWRtaW4gVXNlciAtIFN1cHBvcnREZXNrIiwiZXhwIjoxNzg1NzY1ODY3LCJpYXQiOjE3ODU3NjIyNjcsInVzZXJJZCI6IjZhNmFlMjI2YTIxMmY1ZmYzODMzNTJkYyJ9.s_Oz2YdT5Az5Klkg1IhCSrqmGmUZRMHkYYiq9fRGefw
+
+### Versioned endpoint: get all tickets
+GET http://localhost:8080/api/v1/tickets
+Authorization: Bearer {{token}}
+
+### Create a new ticket
+POST http://localhost:8080/api/v1/tickets
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Laptop not working",
+  "description": "My laptop is not turning on.",
+  "category": "Hardware",
+  "priority": "MEDIUM",
+  "createdBy": "justin@example.com"
+}
+
+### Versioned endpoint: paged tickets
+GET http://localhost:8080/api/v1/tickets/paged?page=0&size=5&sortBy=createdAt&direction=desc
+Authorization: Bearer {{token}}
+
+### API quality: invalid page should return 400 Bad Request
+GET http://localhost:8080/api/v1/tickets/paged?page=-1&size=5&sortBy=createdAt&direction=desc
+Authorization: Bearer {{token}}
+
+### API quality: invalid size should return 400 Bad Request
+GET http://localhost:8080/api/v1/tickets/paged?page=0&size=100&sortBy=createdAt&direction=desc
+Authorization: Bearer {{token}}
+
+### API quality: invalid sort field should return 400 Bad Request
+GET http://localhost:8080/api/v1/tickets/paged?page=0&size=5&sortBy=password&direction=desc
+Authorization: Bearer {{token}}
+
+### Filter tickets by status
+GET http://localhost:8080/api/v1/tickets?status=CLOSED
+Authorization: Bearer {{token}}
+
+### Filter tickets by priority
+GET http://localhost:8080/api/v1/tickets?priority=LOW
+Authorization: Bearer {{token}}
+
+### Filter tickets by category
+GET http://localhost:8080/api/v1/tickets?category=Hardware
+Authorization: Bearer {{token}}
+
+### Sort by createdAt, newest first
+GET http://localhost:8080/api/v1/tickets/paged?page=0&size=5&sortBy=createdAt&direction=desc
+Authorization: Bearer {{token}}
+
+### Sort by createdAt, oldest first 
+GET http://localhost:8080/api/v1/tickets/paged?page=0&size=5&sortBy=createdAt&direction=asc
+Authorization: Bearer {{token}}
+
+### Sort by priority ascending
+GET http://localhost:8080/api/v1/tickets/paged?page=0&size=5&sortBy=priority&direction=asc
+Authorization: Bearer {{token}}
+
+### Report: tickets grouped by status
 GET http://localhost:8080/api/v1/reports/tickets-by-status
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU3MzI2MDksImlhdCI6MTc4NTcyOTAwOSwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.YQOh70kHTC8lPrqYlwQz4ZksUQzEy78Qn5P--b-ZmvY
+Authorization: Bearer {{token}}
 
-### Exercise 3
-### Report count of tickets by priority -> 200 
+### Report: tickets grouped by priority
 GET http://localhost:8080/api/v1/reports/tickets-by-priority
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU3MzI2MDksImlhdCI6MTc4NTcyOTAwOSwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.YQOh70kHTC8lPrqYlwQz4ZksUQzEy78Qn5P--b-ZmvY
-
-### Exercise 4
-### Documentation
-GET http://localhost:8080/api/docs
+Authorization: Bearer {{token}}
