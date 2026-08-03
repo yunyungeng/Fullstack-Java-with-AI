@@ -17,3 +17,9 @@ The database counts server-side and returns just a few summary rows, instead of 
 **How could this report help a support manager decide where to assign staff?**
 
 It shows where the workload is concentrated. A large HIGH-priority count signals urgent tickets that need more staff directed there quickly, while mostly LOW-priority means resources can be spread more evenly. It turns raw tickets into a quick view for staffing decisions.
+
+## Exercise 4: Create a Simple API Documentation Endpoint
+
+**Why is API documentation useful before frontend integration?**
+
+It tells frontend developers exactly what endpoints exist, what to send, and what they'll get back, so they can build against the API without guessing or constantly asking the backend team.

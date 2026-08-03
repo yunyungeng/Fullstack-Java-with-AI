@@ -21,7 +21,7 @@ Content-Type: application/json
 
 ### 2. v1 tickets WITH token -> 200
 GET http://localhost:8080/api/v1/tickets
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU1Njg2MTcsImlhdCI6MTc4NTU2NTAxNywidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.QHzX7qDxNKN4fbEKhuuzPk6zaqoBSxUrizmXB7fPvL8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU3MzI2MDksImlhdCI6MTc4NTcyOTAwOSwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.YQOh70kHTC8lPrqYlwQz4ZksUQzEy78Qn5P--b-ZmvY
 
 ### 2b. Create via v1 with ADMIN token -> 201 
 POST http://localhost:8080/api/v1/tickets
@@ -50,3 +50,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwic
 GET http://localhost:8080/api/v1/reports/tickets-by-priority
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU3MzI2MDksImlhdCI6MTc4NTcyOTAwOSwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.YQOh70kHTC8lPrqYlwQz4ZksUQzEy78Qn5P--b-ZmvY
 
+### Exercise 4
+### Documentation
+GET http://localhost:8080/api/docs
