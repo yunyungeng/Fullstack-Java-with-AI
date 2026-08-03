@@ -5,7 +5,10 @@
 @baseUrl = http://localhost:8080
 
 ### 1. Health Check - public endpoint
-GET {{baseUrl}}/api/health
+GET {{baseUrl}}/api/v1/info
+
+### Documentation - public endpoint
+GET {{baseUrl}}/api/docs
 
 #### 2. Try to access assets without token - should return 401 Unauthorized
 GET {{baseUrl}}/api/assets
@@ -31,12 +34,12 @@ Content-Type: application/json
 
 ### 5. Get assets with user token - should return 200 OK
 ### Replace PLACE_WITH_USER_TOKEN with token received from login/register response 
-GET {{baseUrl}}/api/assets
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1MzgxMDU3LCJpYXQiOjE3ODUzNzc0NTcsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.XBZvNOzzRSjHhjnPp5d_dwhNCeaHlEOq8ehMenDvz6g
+GET {{baseUrl}}/api/v1/assets
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1NTYyNDc3LCJpYXQiOjE3ODU1NTg4NzcsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.2gl1ftfpmT5ZsZ4p3MFbqAgKBjeH3-HInB_L1arki-k
 
 ### 6. Try to create asset with USER token - should return 403 Forbidden
-POST {{baseUrl}}/api/assets
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1MzgxMDU3LCJpYXQiOjE3ODUzNzc0NTcsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.XBZvNOzzRSjHhjnPp5d_dwhNCeaHlEOq8ehMenDvz6g
+POST {{baseUrl}}/api/v1/assets
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1NTYyNDc3LCJpYXQiOjE3ODU1NTg4NzcsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.2gl1ftfpmT5ZsZ4p3MFbqAgKBjeH3-HInB_L1arki-k
 Content-Type: application/json
 
 {
@@ -59,7 +62,7 @@ Content-Type: application/json
 
 ### 8. Create asset with ADMIN token - should return 201 Created
 ### Replace PLACE_ADMIN_TOKEN_HERE with token from admin login response
-POST {{baseUrl}}/api/assets
+POST {{baseUrl}}/api/vi/assets
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlzcyI6ImFzc2V0LXRyYWNrZXIiLCJuYW1lIjoiQWRtaW4gVXNlciIsImV4cCI6MTc4NTM4MTIzNSwiaWF0IjoxNzg1Mzc3NjM1LCJ1c2VySWQiOiI2YTZhYWQwZGRiYmRkZmZlYWI3NDU0MWUifQ.i7cv50edMaidEjwawGnZ4rO06nXo1lcVlz0pTHJ_jPE
 Content-Type: application/json
 
@@ -89,3 +92,15 @@ Content-Type: application/json
   "email": "user@example.com",
   "password": "User@12345"
 }
+
+### 11. Report count of assets by status - should return 200 OK
+GET {{baseUrl}}/api/v1/reports/assets-by-status
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1NzI5NzQwLCJpYXQiOjE3ODU3MjYxNDAsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.lCZuukNCSTSC2YXe1PSu2Ds8wZZYs7mXWJEwvWwM-Ro
+
+### 12. Report count of assets by category - should return 200 OK
+GET {{baseUrl}}/api/v1/reports/assets-by-category
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1NzI5NzQwLCJpYXQiOjE3ODU3MjYxNDAsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.lCZuukNCSTSC2YXe1PSu2Ds8wZZYs7mXWJEwvWwM-Ro
+
+### 13. Report count of assets by location - should return 200 OK
+GET {{baseUrl}}/api/v1/reports/assets-by-location
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6Ik5vcm1hbCBVc2VyIiwiZXhwIjoxNzg1NzI5NzQwLCJpYXQiOjE3ODU3MjYxNDAsInVzZXJJZCI6IjZhNmFhZmRmZGJiZGRmZmVhYjc0NTQxZiJ9.lCZuukNCSTSC2YXe1PSu2Ds8wZZYs7mXWJEwvWwM-Ro
