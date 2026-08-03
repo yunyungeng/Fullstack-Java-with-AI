@@ -39,3 +39,8 @@ Content-Type: application/json
 ### 3. Old /api/tickets still works with token -> 200
 GET http://localhost:8080/api/tickets
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlzcyI6ImFzc2V0LXRyYWNrZXIiLCJuYW1lIjoiQWRtaW4gVXNlciAtIFN1cHBvcnREZXNrIiwiZXhwIjoxNzg1NTY4NzcwLCJpYXQiOjE3ODU1NjUxNzAsInVzZXJJZCI6IjZhNmFlMjI2YTIxMmY1ZmYzODMzNTJkYyJ9.-oCI1r2QOdSrd0Z3rUmfOT5MBVvHd3-Mh4xQ5fcTpM0
+
+### Exercise 2
+### Report count of tickets by status -> 200 
+GET http://localhost:8080/api/v1/reports/tickets-by-status
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbWlyQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJhc3NldC10cmFja2VyIiwibmFtZSI6IkFtaXIiLCJleHAiOjE3ODU3MzI2MDksImlhdCI6MTc4NTcyOTAwOSwidXNlcklkIjoiNmE2YWNmZjFkNTY2ZjJjZjJjMmRkOGMwIn0.YQOh70kHTC8lPrqYlwQz4ZksUQzEy78Qn5P--b-ZmvY
