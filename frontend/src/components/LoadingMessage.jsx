@@ -1,3 +1,3 @@
 export default function LoadingMessage({ message }) {
-    return <div className="message loading-message">{message}</div>
+  return <p className="message loading-message">{message}</p>;
 }

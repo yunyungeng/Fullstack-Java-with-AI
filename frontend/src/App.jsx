@@ -1,24 +1,24 @@
-import { useEffect, useMemo, useState } from 'react'
-import Layout from './components/Layout.jsx'
-import SummaryCard from './components/SummaryCard.jsx'
-import FilterPanel from './components/FilterPanel.jsx'
-import AssetList from './components/AssetList.jsx'
-import AssetDetails from './components/AssetDetails.jsx'
-import ApiInfoCard from './components/ApiInfoCard.jsx'
-import { sampleAssets } from './data/sampleAssets.js'
-import  { fetchApiInfo, fetchApiDocs } from './utils/api.js'
-import { filterAssets } from './utils/assets.js'
-import './styles.css'
+import { useEffect, useMemo, useState } from 'react';
+import Layout from './components/Layout.jsx';
+import SummaryCards from './components/SummaryCards.jsx';
+import FilterPanel from './components/FilterPanel.jsx';
+import AssetList from './components/AssetList.jsx';
+import AssetDetail from './components/AssetDetail.jsx';
+import ApiInfoCard from './components/ApiInfoCard.jsx';
+import { sampleAssets } from './data/sampleAssets.js';
+import  { fetchApiInfo, fetchApiDocs } from './services/api.js';
+import { filterAssets } from './utils/assets.js';
+import './styles.css';
 
 export default function App() {
-  const [assets] = useState(sampleAssets) 
-  const [selectedAsset, setSelectedAsset] = useState(sampleAssets[0])
-  const [searchText, setSearchText] = useState('')
-  const [statusFilter, setStatusFilter] = useState('ALL')
-  const [apiInfo, setApiInfo] = useState(null)
-  const [apiDocs, setApiDocs] = useState(null)
-  const [loadingApi, setLoadingApi] = useState(true)
-  const [apiError, setApiError] = useState('')
+  const [assets] = useState(sampleAssets);
+  const [selectedAsset, setSelectedAsset] = useState(sampleAssets[0]);
+  const [searchText, setSearchText] = useState('');
+  const [statusFilter, setStatusFilter] = useState('ALL');
+  const [apiInfo, setApiInfo] = useState(null);
+  const [apiDocs, setApiDocs] = useState(null);
+  const [loadingApi, setLoadingApi] = useState(true);
+  const [apiError, setApiError] = useState('');
 
   const filteredAssets = useMemo(
     () => filterAssets(assets, searchText, statusFilter),
@@ -61,7 +61,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (filteredAssets.length > 0) {
+    if (filteredAssets.length === 0) {
       setSelectedAsset(null);
       return;
     }
@@ -75,22 +75,29 @@ export default function App() {
 
   return (
     <Layout>
-      <SummaryCard assets={filteredAssets} />
+      <SummaryCards assets={assets} />
+
+      <ApiInfoCard
+        loading={loadingApi}
+        error={apiError}
+        apiInfo={apiInfo}
+        apiDocs={apiDocs}
+      />
 
       <FilterPanel
         searchText={searchText}
         statusFilter={statusFilter}
-        onSearchText={setSearchText}
+        onSearchChange={setSearchText}
         onStatusChange={setStatusFilter}
       />
 
       <section className="workspace-grid">
         <AssetList
           assets={filteredAssets}
-          selectedAsset={selectedAsset}
+          selectedAssetId={selectedAsset?.id}
           onSelectAsset={setSelectedAsset}
         />
-        <AssetDetails asset={selectedAsset} />
+        <AssetDetail asset={selectedAsset} />
       </section>
     </Layout>
   )

@@ -1,19 +1,21 @@
 export function filterAssets(assets, searchText, statusFilter) {
-    const normalizedSearch = searchText.trim().toLowerCase();
+  const normalizedSearch = searchText.trim().toLowerCase();
 
-    return assets.filter(asset => {
-        const matchesSearch =
-            normalizedSearch === 0 || 
-            asset.assetTag.toLowerCase().includes(normalizedSearch) ||
-            asset.name.toLowerCase().includes(normalizedSearch) ||
-            asset.category.toLowerCase().includes(normalizedSearch) ||
-            asset.location.toLowerCase().includes(normalizedSearch) 
-        const matchesStatus = statusFilter === 'ALL' || asset.status === statusFilter;
+  return assets.filter((asset) => {
+    const matchesSearch =
+      normalizedSearch.length === 0 ||
+      asset.assetTag.toLowerCase().includes(normalizedSearch) ||
+      asset.name.toLowerCase().includes(normalizedSearch) ||
+      asset.category.toLowerCase().includes(normalizedSearch) ||
+      asset.location.toLowerCase().includes(normalizedSearch);
 
-        return matchesSearch && matchesStatus;
-    });
+    const matchesStatus =
+      statusFilter === "ALL" || asset.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  });
 }
 
-export function CountByStatus(assets, status) {
-    return assets.filter((asset) => asset.status === status).length;
+export function countByStatus(assets, status) {
+  return assets.filter((asset) => asset.status === status).length;
 }
